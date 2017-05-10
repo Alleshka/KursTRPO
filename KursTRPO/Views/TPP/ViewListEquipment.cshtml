@@ -1,0 +1,24 @@
+﻿@model IEnumerable<KursTRPO.Models.Equipment>
+
+
+@{
+    ViewBag.Title = "Список деталей";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@foreach (KursTRPO.Models.Equipment temp in Model)
+{
+    <div>
+        Номер модели: @temp.DetailNumber; <br />
+        Имя модели: @temp.Name; <br />
+        Операции: @temp.Operations.Count; <br />
+        Количество: @temp.Quantity; <br />
+        Департамент: @temp.Department; <br />
+        ID в базе: @temp.EquipmentId; <br />
+
+        @Html.ActionLink("Удалить", "DeleteEquipment", temp, null)
+
+    </div>
+    <br />
+}

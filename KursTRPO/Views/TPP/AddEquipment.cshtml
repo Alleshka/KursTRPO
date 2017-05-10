@@ -1,0 +1,39 @@
+﻿@model KursTRPO.Models.Equipment
+
+@using (Html.BeginForm())
+{
+    <div>
+        Номер детали:
+        <div>
+            @Html.EditorFor(model =>model.DetailNumber)
+        </div>
+    </div>
+
+    <div>
+        Название детали:
+        <div>
+            @Html.EditorFor(model => model.Name)
+        </div>
+    </div>
+
+    <div>
+        Количество:
+        <div>
+            @Html.EditorFor(model => model.Quantity)
+        </div>
+    </div>
+
+    <div>
+        Департамент:
+        <div>
+            @Html.EditorFor(model => model.Department)
+        </div>
+    </div>
+
+    <div>
+        <div>
+            <input type="submit" value="Добавить" />
+        </div>
+    </div>
+}
+
