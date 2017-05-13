@@ -1,0 +1,69 @@
+﻿// маршрутная машина ????
+@model KursTRPO.Models.RouteCar
+
+@{
+    ViewBag.Title = "AddRouteCar";
+}
+
+<h2>AddRouteCar</h2>
+
+@using (Html.BeginForm())
+{
+
+    // TODO: сделано по шаблону с абсолютным непониманием конечной цели, проверить на ошибки
+
+    <div>
+        Номер маршрута:
+        <div>
+            @Html.EditorFor(model => model.RouteCarId)
+        </div>
+    </div>
+
+    <div>
+        Название предприятия:
+        <div>
+            @Html.EditorFor(model => model.CompanyName)
+        </div>
+    </div>
+
+    <div>
+        Разработал:
+        <div>
+            @Html.EditorFor(model => model.Developer)
+        </div>
+    </div>
+
+    <div>
+        Проверил:
+        <div>
+            @Html.EditorFor(model => model.Checked)
+        </div>
+    </div>
+
+    <div>
+        Согласовано:
+        <div>
+            @Html.EditorFor(model => model.Agreed)
+        </div>
+    </div>
+
+    <div>
+        Утвердил:
+        <div>
+            @Html.EditorFor(model => model.Approved)
+        </div>
+    </div>
+
+    <div>
+        Нормоконтроллер:
+        <div>
+            @Html.EditorFor(model => model.NormСontroller)
+        </div>
+    </div>
+    
+    <div>
+        <div>
+            <input type="submit" value="Добавить" />
+        </div>
+    </div>
+}

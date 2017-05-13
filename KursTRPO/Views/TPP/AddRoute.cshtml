@@ -1,0 +1,55 @@
+﻿
+@model KursTRPO.Models.Route
+
+@{
+    ViewBag.Title = "AddRoute";
+}
+
+<h2>AddRoute</h2>
+
+@using (Html.BeginForm())
+{
+
+    // TODO: сделано по шаблону с абсолютным непониманием конечной цели, проверить на ошибки
+
+    <div>
+        Код ТП:
+        <div>
+            @Html.EditorFor(model => model.TechProcId)
+        </div>
+    </div>
+
+    <div>
+        Название ТП:
+        <div>
+            @Html.EditorFor(model => model.NameTechProc)
+        </div>
+    </div>
+
+    <div>
+        Ф.И.О разработчика:
+        <div>
+            @Html.EditorFor(model => model.NameOfDeveloper)
+        </div>
+    </div>
+
+    <div>
+        Обозначение детали:
+        <div>
+            @Html.EditorFor(model => model.DetailsDesignation)
+        </div>
+    </div>
+
+    <div>
+        Имя детали:
+        <div>
+            @Html.EditorFor(model => model.DetailsName)
+        </div>
+    </div>
+
+    <div>
+        <div>
+            <input type="submit" value="Добавить" />
+        </div>
+    </div>
+}

@@ -1,0 +1,83 @@
+﻿
+@model KursTRPO.Models.Operation
+
+@{
+    ViewBag.Title = "AddOperation";
+}
+
+<h2>AddOperation</h2>
+
+@using (Html.BeginForm())
+{
+
+    // TODO: сделано по шаблону с абсолютным непониманием конечной цели, проверить на ошибки
+
+    <div>
+        Наменование: 
+        <div>
+            @Html.EditorFor(model => model.Name)
+        </div>
+    </div>
+
+    <div>
+        Номер: 
+        <div>
+            @Html.EditorFor(model => model.Number)
+        </div>
+    </div>
+
+    <div>
+        Код перехода:
+        <div>
+            @Html.EditorFor(model => model.TransitionId)
+        </div>
+    </div>
+
+    <div>
+        Название перехода:
+        <div>
+            @Html.EditorFor(model => model.TransitionName)
+        </div>
+    </div>
+
+    <div>
+        Код оборудования:
+        <div>
+            @Html.EditorFor(model => model.EquipmentId)
+        </div>
+    </div>
+
+    <div>
+        Код оснастки:
+        <div>
+            @Html.EditorFor(model => model.RiggingId)
+        </div>
+    </div>
+
+    <div>
+        Номер цеха:
+        <div>
+            @Html.EditorFor(model => model.DepartmentNumber)
+        </div>
+    </div>
+
+    <div>
+        Номер участка:
+        <div>
+            @Html.EditorFor(model => model.SiteNumber)
+        </div>
+    </div>
+
+    <div>
+        Номер рабочего места:
+        <div>
+            @Html.EditorFor(model => model.WorkplaceNumber)
+        </div>
+    </div>
+
+    <div>
+        <div>
+            <input type="submit" value="Добавить" />
+        </div>
+    </div>
+}
