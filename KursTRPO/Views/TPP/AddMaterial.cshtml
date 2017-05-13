@@ -1,0 +1,52 @@
+﻿@model KursTRPO.Models.Material
+
+@{
+    ViewBag.Title = "AddMaterial";
+}
+
+<h2>AddMaterial</h2>
+
+@using (Html.BeginForm())
+{
+
+    <div>
+        Сортамент
+        <div>
+            @Html.EditorFor(model => model.Assortment)
+        </div>
+    </div>
+
+    <div>
+        Название материала
+        <div>
+            @Html.EditorFor(model => model.Name)
+        </div>
+    </div>
+
+    <div>
+        Марка
+        <div>
+            @Html.EditorFor(model => model.Stamp)
+        </div>
+    </div>
+
+    <div>
+        Обозначение стандарта
+        <div>
+            @Html.EditorFor(model => model.DesignOfStandard)
+        </div>
+    </div>
+
+    <div>
+        Технологический процесс
+        <div>
+           // Тут что-то будет
+        </div>
+    </div>
+
+    <div>
+        <div>
+            <input type="submit" value="Добавить" />
+        </div>
+    </div>
+}

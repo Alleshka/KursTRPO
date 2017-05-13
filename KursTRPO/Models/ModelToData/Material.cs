@@ -20,7 +20,5 @@ namespace KursTRPO.Models
 
         public string DesignOfStandard { get; set; }
         public ICollection<TechnologicalProcesses> TechnologicalProcesseses { get; set; }
-
-
     }
 }

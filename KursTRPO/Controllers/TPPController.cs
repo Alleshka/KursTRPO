@@ -14,9 +14,7 @@ namespace KursTRPO.Controllers
         public ActionResult ViewListEquipment()
         {
             TppContext db = new TppContext();
-
             IEnumerable<Equipment> temp = db.Equipments;
-
             return View(temp);
         }
 
@@ -45,6 +43,65 @@ namespace KursTRPO.Controllers
             db.SaveChanges();
 
             return RedirectToAction("ViewListEquipment");
+        }
+
+
+        // Материал
+        public ActionResult ViewListMaterial()
+        {
+            TppContext db = new TppContext();
+            IEnumerable<Material> temp = db.Materials;
+
+            return View(temp);
+        }
+
+        public ActionResult AddMaterial()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddMaterial(Material temp)
+        {
+            TppContext db = new TppContext();
+            db.Materials.Add(temp);
+            db.SaveChanges();
+
+            return RedirectToAction("ViewListMaterial");
+        }
+
+        public ActionResult DeleteMaterial(Material temp)
+        {
+            TppContext db = new TppContext();
+            db.Materials.Remove(db.Materials.Find(temp.MaterialId));
+            db.SaveChanges();
+
+            return RedirectToAction("ViewListMaterial");
+        }
+
+        // Операция
+        public ActionResult ViewListOperation()
+        {
+            TppContext db = new TppContext();
+            IEnumerable<Operation> temp = db.Operations;
+            return View(temp);
+        }
+
+        public ActionResult AddOperation()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddOperation(Operation temp)
+        {
+            if (ModelState.IsValid)
+            {
+                TppContext db = new TppContext();
+                db.Operations.Add(temp);
+                db.SaveChanges();
+            }
+            return RedirectToAction("ViewListOperation");
         }
     }
 }

@@ -1,0 +1,22 @@
+﻿@model IEnumerable<KursTRPO.Models.Material>
+
+@{
+    ViewBag.Title = "ViewListMaterial";
+}
+
+<h2>Список материалов</h2>
+
+@foreach (KursTRPO.Models.Material temp in Model)
+{
+    <div>
+        Кот материала: @temp.MaterialId<br />
+        Сортамент: @temp.Assortment<br />
+        Название: @temp.Name<br />
+        Марка: @temp.Stamp<br />
+        Обозначение стандарта: @temp.DesignOfStandard<br />
+      
+        @Html.ActionLink("Удалить", "DeleteMaterial", temp, null)
+    </div>
+
+    <hr />
+}

@@ -5,7 +5,7 @@ namespace KursTRPO.Models
 {
     public class ApplicationContext : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationContext() : base("IdentityDb") { }
+        public ApplicationContext() : base("UserDB") { }
 
         public static ApplicationContext Create()
         {

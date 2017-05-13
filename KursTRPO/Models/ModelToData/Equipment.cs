@@ -10,7 +10,6 @@ namespace KursTRPO.Models
         {
             Operations = new List<Operation>();
         }
-
         
         public int EquipmentId { get; set; }
 
@@ -23,6 +22,5 @@ namespace KursTRPO.Models
         public string Department { get; set; }
 
         public ICollection<Operation> Operations { get; set; }  
-
     }
 }
