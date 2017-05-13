@@ -1,0 +1,27 @@
+﻿@model IEnumerable<KursTRPO.Models.RouteCar>
+
+
+@{
+    ViewBag.Title = "Список маршрутных карт";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@foreach (KursTRPO.Models.RouteCar temp in Model)
+{
+    // TODO: сделано по шаблону с абсолютным непониманием конечной цели, проверить на ошибки
+    <div>
+        Код маршрутной карты: @temp.RouteCarId; <br />
+        Номер маршрута: @temp.RouteCarId; <br />
+        Название предприятия: @temp.CompanyName; <br />
+        Разработал: @temp.Developer; <br />
+        Проверил: @temp.Checked; <br />
+        Согласовано: @temp.Agreed; <br />
+        Утвердил: @temp.Approved; <br />
+        Нормоконтроллер: @temp.ontroller; <br />
+        
+        @Html.ActionLink("Удалить", "DeleteEquipment", temp, null)
+
+    </div>
+    <br />
+}

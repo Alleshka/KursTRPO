@@ -1,0 +1,41 @@
+﻿
+@model KursTRPO.Models.Rigging
+
+@{
+    ViewBag.Title = "AddRigging";
+}
+
+<h2>AddRigging</h2>
+
+@using (Html.BeginForm())
+{
+
+    // TODO: сделано по шаблону с абсолютным непониманием конечной цели, проверить на ошибки
+
+    <div>
+        Наменование:
+        <div>
+            @Html.EditorFor(model => model.Name)
+        </div>
+    </div>
+
+    <div>
+        Вид инструмента:
+        <div>
+            @Html.EditorFor(model => model.TypeOfTool)
+        </div>
+    </div>
+
+    <div>
+        Количество:
+        <div>
+            @Html.EditorFor(model => model.Quantity)
+        </div>
+    </div>
+
+    <div>
+        <div>
+            <input type="submit" value="Добавить" />
+        </div>
+    </div>
+}

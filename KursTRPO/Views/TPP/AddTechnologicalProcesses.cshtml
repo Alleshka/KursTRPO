@@ -1,0 +1,62 @@
+﻿
+@model KursTRPO.Models.TechnologicalProcesses
+
+@{
+    ViewBag.Title = "AddTechnologicalProcesses";
+}
+
+<h2>AddTechnologicalProcesses</h2>
+
+@using (Html.BeginForm())
+{
+
+    // TODO: сделано по шаблону с абсолютным непониманием конечной цели, проверить на ошибки
+
+    <div>
+        Наменование:
+        <div>
+            @Html.EditorFor(model => model.Name)
+        </div>
+    </div>
+
+    <div>
+        Код операции:
+        <div>
+            @Html.EditorFor(model => model.OperationId)
+        </div>
+    </div>
+
+    <div>
+        Код материала:
+        <div>
+            @Html.EditorFor(model => model.MaterialId)
+        </div>
+    </div>
+
+    <div>
+        Тип по методу выполнения:
+        <div>
+            @Html.EditorFor(model => model.TypeByExecution)
+        </div>
+    </div>
+
+    <div>
+        Номер акта:
+        <div>
+            @Html.EditorFor(model => model.ActNumber)
+        </div>
+    </div>
+
+    <div>
+        Дата внедрения ТП:
+        <div>
+            @Html.EditorFor(model => model.DateStartTechProc)
+        </div>
+    </div>
+    
+    <div>
+        <div>
+            <input type="submit" value="Добавить" />
+        </div>
+    </div>
+}

@@ -1,0 +1,26 @@
+﻿@model IEnumerable<KursTRPO.Models.TechnologicalProcesses>
+
+
+@{
+    ViewBag.Title = "Список тех. процессов";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@foreach (KursTRPO.Models.TechnologicalProcesses temp in Model)
+{
+    // TODO: сделано по шаблону с абсолютным непониманием конечной цели, проверить на ошибки
+    <div>
+        Код тех. процесса: @temp.TechProcId; <br />
+        Наменование: @temp.Name; <br />
+        Код операции: @temp.OperationId; <br />
+        Код материала: @temp.MaterialId; <br />
+        Тип по методу выполнения: @temp.TypeByExecution; <br />
+        Номер акта: @temp.ActNumber; <br />
+        Дата внедрения ТП: @temp.DateStartTechProc; <br />
+        
+        @Html.ActionLink("Удалить", "DeleteEquipment", temp, null)
+
+    </div>
+    <br />
+}
