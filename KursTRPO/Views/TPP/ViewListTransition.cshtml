@@ -1,0 +1,23 @@
+﻿@model IEnumerable<KursTRPO.Models.Transition>
+
+
+@{
+    ViewBag.Title = "Список переходов";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@foreach (KursTRPO.Models.Transition temp in Model)
+{
+    // TODO: сделано по шаблону с абсолютным непониманием конечной цели, проверить на ошибки
+    <div>
+        Код перехода: @temp.TransitionId; <br />
+        Номер перхода: @temp.TransitionNumber; <br />
+        Ключевое слово: @temp.Keyword; <br />
+        Вид перехода: @temp.TransitionType; <br />
+        
+        @Html.ActionLink("Удалить", "DeleteEquipment", temp, null)
+
+    </div>
+    <br />
+}

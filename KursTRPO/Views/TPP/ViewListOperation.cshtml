@@ -1,0 +1,29 @@
+﻿@model IEnumerable<KursTRPO.Models.Operation>
+
+
+@{
+    ViewBag.Title = "Список операций";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@foreach (KursTRPO.Models.Operation temp in Model)
+{
+    // TODO: сделано по шаблону с абсолютным непониманием конечной цели, проверить на ошибки
+    <div>
+        Код операции: @temp.OperationId; <br />
+        Наменование: @temp.Name; <br />
+        Номер: @temp.Number; <br />
+        Код перехода: @temp.TransitionId; <br />
+        Название перехода: @temp.TransitionName; <br />
+        Код оборудования: @temp.EquipmentId; <br />
+        Код оснастки: @temp.RiggingId; <br />
+        Номер цеха: @temp.DepartmentNumber; <br />
+        Номер участка: @temp.SiteNumber; <br />
+        Номер рабочего места: @temp.WorkplaceNumber; <br />
+
+        @Html.ActionLink("Удалить", "DeleteEquipment", temp, null)
+
+    </div>
+    <br />
+}

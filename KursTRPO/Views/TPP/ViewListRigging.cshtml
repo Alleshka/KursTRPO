@@ -1,0 +1,23 @@
+﻿@model IEnumerable<KursTRPO.Models.Rigging>
+
+
+@{
+    ViewBag.Title = "Список оснасток";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@foreach (KursTRPO.Models.Rigging temp in Model)
+{
+    // TODO: сделано по шаблону с абсолютным непониманием конечной цели, проверить на ошибки
+    <div>
+        Код оснастки: @temp.RiggingId; <br />
+        Наменование: @temp.Name; <br />
+        Вид инструмента: @temp.TypeOfTool; <br />
+        Количество: @temp.Quantity; <br />
+        
+        @Html.ActionLink("Удалить", "DeleteEquipment", temp, null)
+
+    </div>
+    <br />
+}

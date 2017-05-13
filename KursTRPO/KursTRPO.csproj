@@ -195,6 +195,12 @@
     <Content Include="Views\TPP\AddRouteCar.cshtml" />
     <Content Include="Views\TPP\AddTechnologicalProcesses.cshtml" />
     <Content Include="Views\TPP\AddTransition.cshtml" />
+    <Content Include="Views\TPP\ViewListOperation.cshtml" />
+    <Content Include="Views\TPP\ViewListRigging.cshtml" />
+    <Content Include="Views\TPP\ViewListRoute.cshtml" />
+    <Content Include="Views\TPP\ViewListRouteCar.cshtml" />
+    <Content Include="Views\TPP\ViewListTechnologicalProcesses.cshtml" />
+    <Content Include="Views\TPP\ViewListTransition.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
