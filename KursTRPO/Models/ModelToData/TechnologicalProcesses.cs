@@ -26,6 +26,7 @@ namespace KursTRPO.Models
         public int ActNumber { get; set; }
 
         [Column(TypeName ="datetime2")]
+        [DataType(DataType.Date)]
         public DateTime DateStartTechProc { get; set; }
         public ICollection<Route> Routes { get; set; }
 

@@ -208,6 +208,7 @@
     <Content Include="Views\TPP\SelectNumber.cshtml" />
     <Content Include="Views\TPP\SelectTransName.cshtml" />
     <Content Include="Views\TPP\SelectWorkPlace.cshtml" />
+    <Content Include="Views\TPP\SelectNameTpp.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

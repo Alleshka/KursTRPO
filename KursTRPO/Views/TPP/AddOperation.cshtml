@@ -9,62 +9,62 @@
 
 @using (Html.BeginForm())
 {
-    <table>
-        <tr>   
+    <table border="1">
+        <tr align="center">   
             <td>Наменование</td>
-            <td>@Html.ActionLink(@Model.Name, "SelectName", "Tpp")</td>
+            <td>@Model.Name</td>
+            <td>@Html.ActionLink("Переименовать", "SelectName", "Tpp")</td>
         </tr>
-        <tr>
+        <tr align="center">
             <td>Номер:</td>
-            <td>@Html.ActionLink(Convert.ToString(@Model.Number), "SelectNumber", "Tpp")</td>
+            <td>@Model.Number</td>
+            <td>@Html.ActionLink("Указать номер", "SelectNumber", "Tpp")</td>
         </tr>
 
-        <tr>
+        <tr align="center">
             <td>Код перехода:</td>
-            <td>
-                @Html.Label(Convert.ToString(Model.TransitionId))
-                @Html.ActionLink("Выбрать из БД", "SelectTransition", new { i = -1 })
-            </td>
+            <td>@Html.Label(Convert.ToString(Model.TransitionId))</td>
+            <td>@Html.ActionLink("Выбрать из БД", "SelectTransition", new { i = -1 })</td>
         </tr>
 
-        <tr>
+        <tr align="center">
             <td>Название перехода</td>
-            <td>@Html.ActionLink(@Model.TransitionName, "SelectTransName", "Tpp")</td>
+            <td>@Model.TransitionName</td>
+            <td>@Html.ActionLink("Переименовать", "SelectTransName", "Tpp")</td>
         </tr>
 
-        <tr>
+        <tr align="center">
             <td>Код оборудования:</td>
-            <td>
-                @Html.Label(Convert.ToString(Model.EquipmentId))
-                @Html.ActionLink("Выбрать из БД", "SelectEquipment", new { i = -1 })
-            </td>
+            <td>@Html.Label(Convert.ToString(Model.EquipmentId))</td>
+            <td>@Html.ActionLink("Выбрать из БД", "SelectEquipment", new { i = -1 })</td>
         </tr>
 
-        <tr>
+        <tr align="center">
             <td>Код оснастки:</td>
-            <td>
-                @Html.Label(Convert.ToString(Model.RiggingId))
-                @Html.ActionLink("Выбрать из БД", "SelectRigging", new { i = -1 })
-            </td>
+            <td>@Html.Label(Convert.ToString(Model.RiggingId))</td>
+            <td>@Html.ActionLink("Выбрать из БД", "SelectRigging", new { i = -1 })</td>
         </tr>
 
-        <tr>
+        <tr align="center">
             <td>Номер цеха:</td>
-            <td>@Html.ActionLink(Convert.ToString(Model.DepartmentNumber), "SelectWorkPlace", "Tpp")</td>
+            <td>@Model.DepartmentNumber</td>
+            <td>@Html.ActionLink("Указать номер", "SelectWorkPlace", "Tpp")</td>
         </tr>
 
-        <tr>
+        <tr align="center">
             <td>Номер участка:</td>
-            <td>@Html.ActionLink(Convert.ToString(Model.SiteNumber), "SelectWorkPlace", "Tpp")</td>
+            <td>@Model.SiteNumber</td>
+            <td>@Html.ActionLink("Указать номер", "SelectWorkPlace", "Tpp")</td>
         </tr>
 
-        <tr>
+        <tr align="center">
             <td>Номер рабочего места:</td>
-            <td>@Html.ActionLink(Convert.ToString(Model.WorkplaceNumber), "SelectWorkPlace", "Tpp")</td>
+            <td>@Model.WorkplaceNumber</td>
+            <td>@Html.ActionLink("Указать номер", "SelectWorkPlace", "Tpp")</td>
         </tr>
 
-        <tr>
-            <td align="center" colspan="2">@Html.ActionLink("Сохранить всё", "SaveOperation") </td >
+        <tr align="center">
+            <td align="center" colspan="3">@Html.ActionLink("Сохранить всё", "SaveOperation") </td >
         </tr>
     </table>
 }

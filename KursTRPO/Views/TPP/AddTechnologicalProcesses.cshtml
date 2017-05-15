@@ -1,5 +1,4 @@
-﻿
-@model KursTRPO.Models.TechnologicalProcesses
+﻿@model KursTRPO.Models.TechnologicalProcesses
 
 @{
     ViewBag.Title = "AddTechnologicalProcesses";
@@ -9,54 +8,44 @@
 
 @using (Html.BeginForm())
 {
+    <table border="1">
+        <tr align="center">
+            <td>Наменование</td>
+            <td>@Model.Name</td>
+            <td>@Html.ActionLink("Переименовать", "SelectNameTpp", "Tpp")</td>
+        </tr>
+        <tr align="center">
+            <td>Код операции:</td>
+            <td>@Model.OperationId</td>
+            <td>@Html.ActionLink("Выбрать из БД", "SelectOperation", "Tpp", new { i = -1 })</td>
+        </tr>
 
-    // TODO: сделано по шаблону с абсолютным непониманием конечной цели, проверить на ошибки
+        <tr align="center">
+            <td>Код материала:</td>
+            <td>@Model.MaterialId</td>
+            <td>@Html.ActionLink("Выбрать из БД", "", new { i = -1 })</td>
+        </tr>
 
-    <div>
-        Наменование:
-        <div>
-            @Html.EditorFor(model => model.Name)
-        </div>
-    </div>
+        <tr align="center">
+            <td>Тип по методу выполнения</td>
+            <td>@Model.TypeByExecution</td>
+            <td>@Html.ActionLink("Указать", "", "Tpp")</td>
+        </tr>
 
-    <div>
-        Код операции:
-        <div>
-            @Html.EditorFor(model => model.OperationId)
-        </div>
-    </div>
+        <tr align="center">
+            <td>Номер акта</td>
+            <td>@Model.ActNumber</td>
+            <td>@Html.ActionLink("Выбрать из БД", "", new { i = -1 })</td>
+        </tr>
 
-    <div>
-        Код материала:
-        <div>
-            @Html.EditorFor(model => model.MaterialId)
-        </div>
-    </div>
+        <tr align="center">
+            <td>Дата внедрения</td>
+            <td>@Model.DateStartTechProc</td>
+            <td>@Html.ActionLink("Указать", "")</td>
+        </tr>
 
-    <div>
-        Тип по методу выполнения:
-        <div>
-            @Html.EditorFor(model => model.TypeByExecution)
-        </div>
-    </div>
-
-    <div>
-        Номер акта:
-        <div>
-            @Html.EditorFor(model => model.ActNumber)
-        </div>
-    </div>
-
-    <div>
-        Дата внедрения ТП:
-        <div>
-            @Html.EditorFor(model => model.DateStartTechProc)
-        </div>
-    </div>
-    
-    <div>
-        <div>
-            <input type="submit" value="Добавить" />
-        </div>
-    </div>
+        <tr align="center">
+            <td align="center" colspan="3">@Html.ActionLink("Сохранить всё", "SaveOperation") </td>
+        </tr>
+    </table>
 }

@@ -23,7 +23,6 @@
     </tr>
     @foreach (KursTRPO.Models.Operation temp in Model)
     {
-
         <tr>
             <td>@temp.OperationId</td>
             <td>@temp.Name</td>
@@ -36,7 +35,7 @@
             <td>@temp.SiteNumber</td>
             <td>@temp.WorkplaceNumber</td>
 
-            <td>@Html.ActionLink("Выбрать", "", temp, null)</td>
+            <td>@Html.ActionLink("Выбрать", "SelectOperation", new { i = @temp.OperationId }, null)</td>
             <td>@Html.ActionLink("Удалить", "DeleteOperation", temp, null)</td>
         </tr>
     }
