@@ -1,5 +1,6 @@
 ﻿@model KursTRPO.Models.Operation
 
+
 @{
     ViewBag.Title = "AddOperation";
 }
@@ -8,74 +9,85 @@
 
 @using (Html.BeginForm())
 {
-    <div>
-        Наменование: 
-        <div>
-            @Html.Editor("Name", Model.Name)
-        </div>
-    </div>
+    <table>
+        <tr>   
+            <td>Наменование</td>
+            <td>@Html.ActionLink(@Model.Name, "SelectName", "Tpp")</td>
+        </tr>
+        <tr>
+            <td>Номер:</td>
+            <td>@Html.ActionLink(Convert.ToString(@Model.Number), "SelectNumber", "Tpp")</td>
+        </tr>
 
-    <div>
-        Номер: 
-        <div>
-            @Html.Editor("Number", Model.Number)
-        </div>
-    </div>
+        <tr>
+            <td>Код перехода:</td>
+            <td>
+                @Html.Label(Convert.ToString(Model.TransitionId))
+                @Html.ActionLink("Выбрать из БД", "SelectTransition", new { i = -1 })
+            </td>
+        </tr>
 
-    <div>
-        Код перехода:
-        <div>
-            @Html.Editor("TransitionId", Model.TransitionId)
-            @Html.ActionLink("Выбрать из БД", "SelectTransition", new { i = -1 })
-        </div>
-    </div>
+        <tr>
+            <td>Название перехода</td>
+            <td>@Html.ActionLink(@Model.TransitionName, "SelectTransName", "Tpp")</td>
+        </tr>
 
-    <div>
-        Название перехода:
-        <div>
-            @Html.Editor("TransitionName", Model.TransitionName)
-        </div>
-    </div>
+        <tr>
+            <td>Код оборудования:</td>
+            <td>
+                @Html.Label(Convert.ToString(Model.EquipmentId))
+                @Html.ActionLink("Выбрать из БД", "SelectEquipment", new { i = -1 })
+            </td>
+        </tr>
 
-    <div>
-        Код оборудования:
-        <div>
-            @Html.Editor("EquipmentId", Model.EquipmentId)
-            @Html.ActionLink("Выбрать из БД", "SelectEquipment", new { i = -1 })
-        </div>
-    </div>
+        <tr>
+            <td>Код оснастки:</td>
+            <td>
+                @Html.Label(Convert.ToString(Model.RiggingId))
+                @Html.ActionLink("Выбрать из БД", "SelectRigging", new { i = -1 })
+            </td>
+        </tr>
 
-    <div>
-        Код оснастки:
-        <div>
-            @Html.Editor("RiggingId", Model.RiggingId)
-        </div>
-    </div>
+        <tr>
+            <td>Номер цеха:</td>
+            <td>@Html.ActionLink(Convert.ToString(Model.DepartmentNumber), "SelectWorkPlace", "Tpp")</td>
+        </tr>
 
-    <div>
-        Номер цеха:
-        <div>
-            @Html.Editor("DepartmentNumber", Model.DepartmentNumber)
-        </div>
-    </div>
+        <tr>
+            <td>Номер участка:</td>
+            <td>@Html.ActionLink(Convert.ToString(Model.SiteNumber), "SelectWorkPlace", "Tpp")</td>
+        </tr>
 
-    <div>
-        Номер участка:
-        <div>
-            @Html.Editor("SiteNumber", Model.SiteNumber)
-        </div>
-    </div>
+        <tr>
+            <td>Номер рабочего места:</td>
+            <td>@Html.ActionLink(Convert.ToString(Model.WorkplaceNumber), "SelectWorkPlace", "Tpp")</td>
+        </tr>
 
-    <div>
-        Номер рабочего места:
-        <div>
-            @Html.Editor("WorkplaceNumber", Model.WorkplaceNumber)
-        </div>
-    </div>
-
-    <div>
-        <div>
-            <input type="submit" value="Добавить" />
-        </div>
-    </div>
+        <tr>
+            <td align="center" colspan="2">@Html.ActionLink("Сохранить всё", "SaveOperation") </td >
+        </tr>
+    </table>
 }
+
+<script src='@Url.Content("~/Scripts/jquery-1.12.4.min.js")' type="text/javascript"></script>
+<script src='@Url.Content("~/Scripts/jquery-ui-1.12.1.min.js")' type="text/javascript"></script>
+<script>
+    $(document).ready(function () {
+
+        $.ajaxSetup({ cache: false });
+
+        $(".viewDialog").on("click", function (e) {
+            e.preventDefault();
+
+            $("<div></div>")
+                .addClass("dialog")
+                .appendTo("body")
+                .dialog({
+                    title: $(this).attr("data-dialog-title"),
+                     close: function () { $(this).remove() },
+                    modal: true
+                })
+                .load(this.href);
+        });
+    });
+</script>

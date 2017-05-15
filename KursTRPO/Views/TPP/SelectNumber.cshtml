@@ -1,0 +1,11 @@
+﻿@model KursTRPO.Models.Operation
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div>
+        <p> @Html.Label("Номер процесса:") @Html.EditorFor(model => model.Number)</p>
+    </div>
+    <p><input type="submit" value="Сохранить" /></p>
+}
+

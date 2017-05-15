@@ -1,0 +1,21 @@
+﻿@model KursTRPO.Models.Operation
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <table>
+        <tr>
+            <td>@Html.Label("Номер департамента:")</td>
+            <td>@Html.EditorFor(model => model.DepartmentNumber)</td>
+        </tr>
+        <tr>
+            <td>@Html.Label("Номер участка:")</td>
+            <td>@Html.EditorFor(model => model.SiteNumber)</td>
+        </tr>
+        <tr>
+            <td>@Html.Label("Номер рабочего места:")</td>
+            <td>@Html.EditorFor(model => model.WorkplaceNumber)</td>
+        </tr>
+        <tr><td colspan="2"><input type="submit" value="Сохранить" /></td></tr>
+    </table>
+}

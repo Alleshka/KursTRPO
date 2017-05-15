@@ -10,7 +10,7 @@ namespace KursTRPO.Controllers
 {
     public class TPPController : Controller
     {
-        private string NameCookie = "OperationCookie2";
+        private string NameCookie = "OperationCookieLast";
 
         // Детали
         public ActionResult ViewListEquipment()
@@ -44,23 +44,6 @@ namespace KursTRPO.Controllers
             return RedirectToAction("ViewListEquipment");
         }
 
-        public ActionResult SelectEquipment(int i = -1)
-        {
-            if (i == -1)
-            {
-                return RedirectToAction("ViewListEquipment");
-            }
-            else
-            {
-                HttpCookie cookie = GetCoockie(NameCookie);
-                cookie["EquipmentId"] = Convert.ToString(i);
-
-                Response.Cookies.Add(cookie);
-                Operation temp = RefreshOperation();
-
-                return RedirectToAction("AddOperation", temp);
-            }
-        }
 
 
         // Материал
@@ -103,20 +86,21 @@ namespace KursTRPO.Controllers
         public ActionResult AddOperation()
         {
             // Создаём свой набор куки
-            Operation temp = new Operation();
-            temp = RefreshOperation();
+            Operation temp = RefreshOperation();
 
             return View(temp);
         }
-        [HttpPost]
-        public ActionResult AddOperation(Operation temp)
+
+        public ActionResult SaveOperation()
         {
-            if (ModelState.IsValid)
-            {
-                TppContext db = new TppContext();
-                db.Operations.Add(temp);
-                db.SaveChanges();
-            }
+            HttpCookie coockie = GetCoockie(this.NameCookie);
+            Operation temp = RefreshOperation();
+
+            TppContext db = new TppContext();
+            db.Operations.Add(temp);
+            db.SaveChanges();  // Добавили в БД
+            ClearCookie(NameCookie); // Мы же молодцы, убираем за собой
+
             return RedirectToAction("ViewListOperation");
         }
         public ActionResult DeleteOperation(Operation temp)
@@ -283,22 +267,7 @@ namespace KursTRPO.Controllers
             return RedirectToAction("ViewListTransition");
         }
 
-        public ActionResult SelectTransition(int i = -1)
-        {
-            if (i == -1)
-            {
-                return RedirectToAction("ViewListTransition");
-            }
-            else
-            {
-                HttpCookie cookie = GetCoockie(NameCookie);
-                cookie["TransitionId"] = Convert.ToString(i);
-                Response.Cookies.Add(cookie);
-                Operation temp = RefreshOperation();
-                return RedirectToAction("AddOperation", temp);
-            }
-        }
-
+        // Куки
         private Operation RefreshOperation()
         {
             Operation temp = new Operation();
@@ -309,8 +278,7 @@ namespace KursTRPO.Controllers
             {
                 cookieReq = CreateCookie(NameCookie);
             }
-            else
-            {
+
                 temp.OperationId = Convert.ToInt32(cookieReq["OperationId"]);
                 temp.Name = cookieReq["Name"];
                 temp.Number = Convert.ToInt32(cookieReq["Number"]);
@@ -321,7 +289,7 @@ namespace KursTRPO.Controllers
                 temp.DepartmentNumber = Convert.ToInt32(cookieReq["DepartmentNumber"]);
                 temp.SiteNumber = Convert.ToInt32(cookieReq["SiteNumber"]);
                 temp.WorkplaceNumber = Convert.ToInt32(cookieReq["WorkplaceNumber"]);
-            }
+            
 
             return temp;
         }
@@ -341,21 +309,145 @@ namespace KursTRPO.Controllers
         private HttpCookie CreateCookie(string name)
         {
             HttpCookie cookie = new HttpCookie(NameCookie);
-            cookie.Expires = DateTime.Now.AddYears(1);
+            cookie.Expires = DateTime.Now.AddDays(2);
             // Задаём начальные куки
-            cookie["OperationId"] = "-1";
-            cookie["Name"] = "-1";
-            cookie["Number"] = "-1";
-            cookie["TransitionId"] = "-1";
-            cookie["TransitionName"] = "-1";
-            cookie["EquipmentId"] = "-1";
-            cookie["RiggingId"] = "-1";
-            cookie["DepartmentNumber"] = "-1";
-            cookie["SiteNumber"] = "-1";
-            cookie["WorkplaceNumber"] = "-1";
+            cookie["OperationId"] = "0";
+            cookie["Name"] = "DefaultName";
+            cookie["Number"] = "0";
+            cookie["TransitionId"] = "0";
+            cookie["TransitionName"] = "DefaultName";
+            cookie["EquipmentId"] = "0";
+            cookie["RiggingId"] = "0";
+            cookie["DepartmentNumber"] = "0";
+            cookie["SiteNumber"] = "0";
+            cookie["WorkplaceNumber"] = "0";
             Response.Cookies.Add(cookie);
 
             return cookie;
         }
+        private void ClearCookie(string name)
+        {
+            HttpCookie temp = new HttpCookie(name);
+            temp.Expires = DateTime.Now.AddDays(-5);
+        }
+
+        // Заполнение ТПП
+        public ActionResult SelectTransition(int i = -1)
+        {
+            if (i == -1)
+            {
+                return RedirectToAction("ViewListTransition");
+            }
+            else
+            {
+                HttpCookie cookie = GetCoockie(NameCookie);
+                cookie["TransitionId"] = Convert.ToString(i);
+                Response.Cookies.Add(cookie);
+                Operation temp = RefreshOperation();
+                return RedirectToAction("AddOperation", temp);
+            }
+        }
+
+        public ActionResult SelectEquipment(int i = -1)
+        {
+            if (i == -1)
+            {
+                return RedirectToAction("ViewListEquipment");
+            }
+            else
+            {
+                HttpCookie cookie = GetCoockie(NameCookie);
+                cookie["EquipmentId"] = Convert.ToString(i);
+
+                Response.Cookies.Add(cookie);
+                Operation temp = RefreshOperation();
+
+                return RedirectToAction("AddOperation", temp);
+            }
+        }
+
+        public ActionResult SelectRigging(int i = -1)
+        {
+            if (i == -1)
+            {
+                return RedirectToAction("ViewListRigging");
+            }
+            else
+            {
+                HttpCookie cookie = GetCoockie(NameCookie);
+                cookie["RiggingId"] = Convert.ToString(i);
+
+                Response.Cookies.Add(cookie);
+                Operation temp = RefreshOperation();
+
+                return RedirectToAction("AddOperation", temp);
+            }
+        }
+
+        // Указать имя операции
+        public ActionResult SelectName()
+        {
+            Operation temp = RefreshOperation();
+            return PartialView(temp);
+        }
+        [HttpPost]
+        public ActionResult SelectName(string name)
+        {
+            HttpCookie temp = GetCoockie(NameCookie);
+            temp["Name"] = name;
+            Response.Cookies.Add(temp);
+
+            return RedirectToAction("AddOperation");
+        }
+
+        // Указать номер операции
+        public ActionResult SelectNumber()
+        {
+            Operation temp = RefreshOperation();
+            return PartialView(temp);
+        }     
+        [HttpPost]
+        public ActionResult SelectNumber(Operation num)
+        {
+            HttpCookie cookie = GetCoockie(NameCookie);
+            cookie["Number"] = Convert.ToString(num.Number);
+            Response.Cookies.Add(cookie);
+
+            return RedirectToAction("AddOperation"); 
+        }
+
+        public ActionResult SelectTransName()
+        {
+            Operation temp = RefreshOperation();
+            return PartialView(temp);
+        }
+        [HttpPost]
+        public ActionResult SelectTransName(string name)
+        {
+            HttpCookie cookie = GetCoockie(NameCookie);
+            cookie["TransitionName"] = Convert.ToString(name);
+            Response.Cookies.Add(cookie);
+
+            return RedirectToAction("AddOperation");
+        }
+
+        public ActionResult SelectWorkPlace()
+        {
+            Operation temp = RefreshOperation();
+            return PartialView(temp);
+        }
+        [HttpPost]
+        public ActionResult SelectWorkPlace(Operation num)
+        {
+            HttpCookie cookie = GetCoockie(NameCookie);
+            cookie["DepartmentNumber"] = Convert.ToString(num.DepartmentNumber);
+            cookie["SiteNumber"] = Convert.ToString(num.SiteNumber);
+            cookie["WorkplaceNumber"] = Convert.ToString(num.WorkplaceNumber);
+
+            Response.Cookies.Add(cookie);
+
+            return RedirectToAction("AddOperation");
+        }
+
     }
 }

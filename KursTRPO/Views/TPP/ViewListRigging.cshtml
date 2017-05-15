@@ -24,7 +24,7 @@
         <td>@temp.TypeOfTool</td>
         <td>@temp.Quantity</td>
 
-        <td>@Html.ActionLink("Выбрать", "", temp, null)</td>
+        <td>@Html.ActionLink("Выбрать", "SelectRigging", new { i = @temp.RiggingId })</td>
         <td>@Html.ActionLink("Удалить", "DeleteRigging", temp, null)</td>
     </tr>
     }
