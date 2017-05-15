@@ -10,6 +10,8 @@ namespace KursTRPO.Controllers
 {
     public class TPPController : Controller
     {
+        private string NameCookie = "OperationCookie2";
+
         // Детали
         public ActionResult ViewListEquipment()
         {
@@ -40,6 +42,24 @@ namespace KursTRPO.Controllers
             db.SaveChanges();
 
             return RedirectToAction("ViewListEquipment");
+        }
+
+        public ActionResult SelectEquipment(int i = -1)
+        {
+            if (i == -1)
+            {
+                return RedirectToAction("ViewListEquipment");
+            }
+            else
+            {
+                HttpCookie cookie = GetCoockie(NameCookie);
+                cookie["EquipmentId"] = Convert.ToString(i);
+
+                Response.Cookies.Add(cookie);
+                Operation temp = RefreshOperation();
+
+                return RedirectToAction("AddOperation", temp);
+            }
         }
 
 
@@ -82,7 +102,11 @@ namespace KursTRPO.Controllers
         }
         public ActionResult AddOperation()
         {
-            return View();
+            // Создаём свой набор куки
+            Operation temp = new Operation();
+            temp = RefreshOperation();
+
+            return View(temp);
         }
         [HttpPost]
         public ActionResult AddOperation(Operation temp)
@@ -173,7 +197,7 @@ namespace KursTRPO.Controllers
             IEnumerable<RouteCar> temp = db.RouteCars;
             return View(temp);
         }
-        public ActionResult AddRoutCar()
+        public ActionResult AddRouteCar()
         {
             return View();
         }
@@ -259,6 +283,79 @@ namespace KursTRPO.Controllers
             return RedirectToAction("ViewListTransition");
         }
 
+        public ActionResult SelectTransition(int i = -1)
+        {
+            if (i == -1)
+            {
+                return RedirectToAction("ViewListTransition");
+            }
+            else
+            {
+                HttpCookie cookie = GetCoockie(NameCookie);
+                cookie["TransitionId"] = Convert.ToString(i);
+                Response.Cookies.Add(cookie);
+                Operation temp = RefreshOperation();
+                return RedirectToAction("AddOperation", temp);
+            }
+        }
 
+        private Operation RefreshOperation()
+        {
+            Operation temp = new Operation();
+
+            HttpCookie cookieReq = Request.Cookies[NameCookie];
+
+            if (cookieReq == null)
+            {
+                cookieReq = CreateCookie(NameCookie);
+            }
+            else
+            {
+                temp.OperationId = Convert.ToInt32(cookieReq["OperationId"]);
+                temp.Name = cookieReq["Name"];
+                temp.Number = Convert.ToInt32(cookieReq["Number"]);
+                temp.TransitionId = Convert.ToInt32(cookieReq["TransitionId"]);
+                temp.TransitionName = cookieReq["TransitionName"];
+                temp.EquipmentId = Convert.ToInt32(cookieReq["EquipmentId"]);
+                temp.RiggingId = Convert.ToInt32(cookieReq["RiggingId"]);
+                temp.DepartmentNumber = Convert.ToInt32(cookieReq["DepartmentNumber"]);
+                temp.SiteNumber = Convert.ToInt32(cookieReq["SiteNumber"]);
+                temp.WorkplaceNumber = Convert.ToInt32(cookieReq["WorkplaceNumber"]);
+            }
+
+            return temp;
+        }
+        private HttpCookie GetCoockie(string name)
+        {
+            HttpCookie temp = Request.Cookies[name];
+            if (temp != null)
+            {
+                return temp;
+            }
+            else
+            {
+                return CreateCookie(name);
+            }
+
+        }
+        private HttpCookie CreateCookie(string name)
+        {
+            HttpCookie cookie = new HttpCookie(NameCookie);
+            cookie.Expires = DateTime.Now.AddYears(1);
+            // Задаём начальные куки
+            cookie["OperationId"] = "-1";
+            cookie["Name"] = "-1";
+            cookie["Number"] = "-1";
+            cookie["TransitionId"] = "-1";
+            cookie["TransitionName"] = "-1";
+            cookie["EquipmentId"] = "-1";
+            cookie["RiggingId"] = "-1";
+            cookie["DepartmentNumber"] = "-1";
+            cookie["SiteNumber"] = "-1";
+            cookie["WorkplaceNumber"] = "-1";
+            Response.Cookies.Add(cookie);
+
+            return cookie;
+        }
     }
 }

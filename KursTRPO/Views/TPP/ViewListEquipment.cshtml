@@ -7,17 +7,25 @@
 
 <h2>@ViewBag.Title</h2>
 
-@foreach (KursTRPO.Models.Equipment temp in Model)
-{
-    <div>
-        Код оборудования: @temp.EquipmentId; <br />
-        Номер детали: @temp.DetailNumber; <br />
-        Наименование: @temp.Name; <br />
-        Количество: @temp.Quantity; <br />
-        Цех: @temp.Department; <br />
+<table width="100%">
+    <tr align="center">
+        <td>Код оборудования</td>
+        <td>Номер детали</td>
+        <td>Наименование</td>
+        <td>Количество</td>
+        <td>Цех</td>
+    </tr>
+    @foreach (KursTRPO.Models.Equipment temp in Model)
+    {
+        <tr align="center">
+            <td>@temp.EquipmentId</td>
+            <td> @temp.DetailNumber </td >
+            <td> @temp.Name</td>
+            <td>@temp.Quantity </td>
+            <td>@temp.Department</td>
+            <td>@Html.ActionLink("Выбрать", "SelectEquipment", new { i = @temp.EquipmentId})</td>
+            <td>@Html.ActionLink("Удалить", "DeleteEquipment", temp, null)</td>
+        </tr>
+    }
 
-        @Html.ActionLink("Удалить", "DeleteEquipment", temp, null)
-
-    </div>
-    <br />
-}
+</table>

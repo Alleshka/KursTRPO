@@ -7,23 +7,37 @@
 
 <h2>@ViewBag.Title</h2>
 
-@foreach (KursTRPO.Models.Operation temp in Model)
-{
-    // TODO: сделано по шаблону с абсолютным непониманием конечной цели, проверить на ошибки
-    <div>
-        Код операции: @temp.OperationId; <br />
-        Наменование: @temp.Name; <br />
-        Номер: @temp.Number; <br />
-        Код перехода: @temp.TransitionId; <br />
-        Название перехода: @temp.TransitionName; <br />
-        Код оборудования: @temp.EquipmentId; <br />
-        Код оснастки: @temp.RiggingId; <br />
-        Номер цеха: @temp.DepartmentNumber; <br />
-        Номер участка: @temp.SiteNumber; <br />
-        Номер рабочего места: @temp.WorkplaceNumber; <br />
+<table>
 
-        @Html.ActionLink("Удалить", "DeleteOperation", temp, null)
+    <tr>
+        <td>Код операции</td>
+        <td>Наименование</td>
+        <td>Номер</td>
+        <td>Код перехода</td>
+        <td>Название перехода</td>
+        <td>Код оборудования</td>
+        <td>Код оснастки</td>
+        <td>Номер цеха</td>
+        <td>Номер участка</td>
+        <td>Номер рабочего места</td>
+    </tr>
+    @foreach (KursTRPO.Models.Operation temp in Model)
+    {
 
-    </div>
-    <br />
-}
+        <tr>
+            <td>@temp.OperationId</td>
+            <td>@temp.Name</td>
+            <td>@temp.Number</td>
+            <td>@temp.TransitionId</td>
+            <td>@temp.TransitionName</td>
+            <td>@temp.EquipmentId</td>
+            <td>@temp.RiggingId</td>
+            <td>@temp.DepartmentNumber</td>
+            <td>@temp.SiteNumber</td>
+            <td>@temp.WorkplaceNumber</td>
+
+            <td>@Html.ActionLink("Выбрать", "", temp, null)</td>
+            <td>@Html.ActionLink("Удалить", "DeleteOperation", temp, null)</td>
+        </tr>
+    }
+</table>

@@ -1,5 +1,4 @@
-﻿
-@model KursTRPO.Models.Operation
+﻿@model KursTRPO.Models.Operation
 
 @{
     ViewBag.Title = "AddOperation";
@@ -9,69 +8,68 @@
 
 @using (Html.BeginForm())
 {
-
-    // TODO: сделано по шаблону с абсолютным непониманием конечной цели, проверить на ошибки
-
     <div>
         Наменование: 
         <div>
-            @Html.EditorFor(model => model.Name)
+            @Html.Editor("Name", Model.Name)
         </div>
     </div>
 
     <div>
         Номер: 
         <div>
-            @Html.EditorFor(model => model.Number)
+            @Html.Editor("Number", Model.Number)
         </div>
     </div>
 
     <div>
         Код перехода:
         <div>
-            @Html.EditorFor(model => model.TransitionId)
+            @Html.Editor("TransitionId", Model.TransitionId)
+            @Html.ActionLink("Выбрать из БД", "SelectTransition", new { i = -1 })
         </div>
     </div>
 
     <div>
         Название перехода:
         <div>
-            @Html.EditorFor(model => model.TransitionName)
+            @Html.Editor("TransitionName", Model.TransitionName)
         </div>
     </div>
 
     <div>
         Код оборудования:
         <div>
-            @Html.EditorFor(model => model.EquipmentId)
+            @Html.Editor("EquipmentId", Model.EquipmentId)
+            @Html.ActionLink("Выбрать из БД", "SelectEquipment", new { i = -1 })
         </div>
     </div>
 
     <div>
         Код оснастки:
         <div>
-            @Html.EditorFor(model => model.RiggingId)
+            @Html.Editor("RiggingId", Model.RiggingId)
         </div>
     </div>
 
     <div>
         Номер цеха:
         <div>
-            @Html.EditorFor(model => model.DepartmentNumber)
+            @Html.Editor("DepartmentNumber", Model.DepartmentNumber)
         </div>
     </div>
 
     <div>
         Номер участка:
         <div>
-            @Html.EditorFor(model => model.SiteNumber)
+            @Html.Editor("SiteNumber", Model.SiteNumber)
         </div>
     </div>
 
     <div>
         Номер рабочего места:
         <div>
-            @Html.EditorFor(model => model.WorkplaceNumber)
+            @Html.Editor("WorkplaceNumber", Model.WorkplaceNumber)
         </div>
     </div>
 

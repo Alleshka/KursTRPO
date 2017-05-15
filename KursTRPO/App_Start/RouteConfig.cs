@@ -18,6 +18,12 @@ namespace KursTRPO
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+    name: "Default2",
+    url: "{controller}/{action}/{id}/{Operation}",
+    defaults: new { controller = "Tpp", action = "SelectTransition", id = UrlParameter.Optional, Operation = UrlParameter.Optional}
+);
         }
     }
 }

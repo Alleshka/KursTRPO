@@ -7,20 +7,31 @@
 
 <h2>@ViewBag.Title</h2>
 
-@foreach (KursTRPO.Models.TechnologicalProcesses temp in Model)
-{
-    // TODO: сделано по шаблону с абсолютным непониманием конечной цели, проверить на ошибки
-    <div>
-        Код тех. процесса: @temp.TechProcId; <br />
-        Наменование: @temp.Name; <br />
-        Код операции: @temp.OperationId; <br />
-        Код материала: @temp.MaterialId; <br />
-        Тип по методу выполнения: @temp.TypeByExecution; <br />
-        Номер акта: @temp.ActNumber; <br />
-        Дата внедрения ТП: @temp.DateStartTechProc; <br />
-        
-        @Html.ActionLink("Удалить", "TechnologicalProcesses", temp, null)
+<table>
+    <tr>
+        <td>Код тех. процесса</td>
+        <td>Наименование</td>
+        <td>Код операции</td>
+        <td>Код материалла</td>
+        <td>Тип по методу выполнения</td>
+        <td>Номер акта</td>
+        <td>Дата внедрения ТП</td>
+    </tr>
 
-    </div>
-    <br />
-}
+
+    @foreach (KursTRPO.Models.TechnologicalProcesses temp in Model)
+    {
+        <tr>
+            <td>@temp.TechProcId</td>
+            <td>@temp.Name</td>
+            <td>@temp.OperationId</td>
+            <td>@temp.MaterialId</td>
+            <td>@temp.TypeByExecution</td>
+            <td>@temp.ActNumber</td>
+            <td>@temp.DateStartTechProc</td>
+
+            <td>@Html.ActionLink("Выбрать", "", temp, null)</td>
+            <td>@Html.ActionLink("Удалить", "DeleteTechnologicalProcesses", temp, null)</td>
+        </tr>
+    }
+</table>

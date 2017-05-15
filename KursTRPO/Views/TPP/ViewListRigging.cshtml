@@ -7,17 +7,26 @@
 
 <h2>@ViewBag.Title</h2>
 
-@foreach (KursTRPO.Models.Rigging temp in Model)
-{
-    // TODO: сделано по шаблону с абсолютным непониманием конечной цели, проверить на ошибки
-    <div>
-        Код оснастки: @temp.RiggingId; <br />
-        Наменование: @temp.Name; <br />
-        Вид инструмента: @temp.TypeOfTool; <br />
-        Количество: @temp.Quantity; <br />
-        
-        @Html.ActionLink("Удалить", "DeleteRigging", temp, null)
+<table>
+    <tr>
+        <td>Код оснастки</td>
+        <td>Наименование</td>
+        <td>Вид инструмента</td>
+        <td>Количество</td>
+    </tr>
 
-    </div>
-    <br />
-}
+
+    @foreach (KursTRPO.Models.Rigging temp in Model)
+    {
+    <tr>
+        <td>@temp.RiggingId</td>
+        <td>@temp.Name</td>
+        <td>@temp.TypeOfTool</td>
+        <td>@temp.Quantity</td>
+
+        <td>@Html.ActionLink("Выбрать", "", temp, null)</td>
+        <td>@Html.ActionLink("Удалить", "DeleteRigging", temp, null)</td>
+    </tr>
+    }
+
+</table>

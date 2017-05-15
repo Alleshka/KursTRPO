@@ -5,18 +5,24 @@
 }
 
 <h2>Список материалов</h2>
-
-@foreach (KursTRPO.Models.Material temp in Model)
-{
-    <div>
-        Код материала: @temp.MaterialId<br />
-        Сортамент: @temp.Assortment<br />
-        Название: @temp.Name<br />
-        Марка: @temp.Stamp<br />
-        Обозначение стандарта: @temp.DesignOfStandard<br />
-      
-        @Html.ActionLink("Удалить", "DeleteMaterial", temp, null)
-    </div>
-
-    <hr />
-}
+<table width="100%">
+    <tr align="center">
+        <td>Код материала</td>
+        <td>Сортамент</td>
+        <td>Название</td>
+        <td>Марка</td>
+        <td>Обозначение стандарта</td>
+    </tr>
+    @foreach (KursTRPO.Models.Material temp in Model)
+    {
+        <tr align="center">
+            <td>@temp.MaterialId</td>
+            <td>@temp.Assortment</td>
+            <td>@temp.Name</td>
+            <td>@temp.Stamp</td>
+            <td>@temp.DesignOfStandard</td>
+            <td>@Html.ActionLink("Выбрать", "", temp, null)</td>
+            <td>@Html.ActionLink("Удалить", "DeleteMaterial", temp, null)</td>
+        </tr>
+    }
+</table>

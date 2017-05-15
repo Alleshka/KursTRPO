@@ -201,6 +201,7 @@
     <Content Include="Views\TPP\ViewListRouteCar.cshtml" />
     <Content Include="Views\TPP\ViewListTechnologicalProcesses.cshtml" />
     <Content Include="Views\TPP\ViewListTransition.cshtml" />
+    <Content Include="Views\TPP\SelectTransition.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

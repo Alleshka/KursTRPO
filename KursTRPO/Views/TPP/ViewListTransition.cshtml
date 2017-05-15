@@ -6,18 +6,24 @@
 }
 
 <h2>@ViewBag.Title</h2>
+<table>
+    <tr>
+        <td>Код перехода</td>
+        <td>Номер перехода</td>
+        <td>Ключевое слово</td>
+        <td>Вид перехода</td>
+    </tr>
 
-@foreach (KursTRPO.Models.Transition temp in Model)
-{
-    // TODO: сделано по шаблону с абсолютным непониманием конечной цели, проверить на ошибки
-    <div>
-        Код перехода: @temp.TransitionId; <br />
-        Номер перхода: @temp.TransitionNumber; <br />
-        Ключевое слово: @temp.Keyword; <br />
-        Вид перехода: @temp.TransitionType; <br />
-        
-        @Html.ActionLink("Удалить", "DeleteTransition", temp, null)
+    @foreach (KursTRPO.Models.Transition temp in Model)
+    {
+        <tr>
+            <td>@temp.TransitionId</td>
+            <td>@temp.TransitionNumber</td>
+            <td>@temp.Keyword</td>
+            <td>@temp.TransitionType</td>
 
-    </div>
-    <br />
-}
+            <td>@Html.ActionLink("Выбрать", "SelectTransition", new { i = @temp.TransitionId})</td>
+            <td>@Html.ActionLink("Удалить", "DeleteTransition", temp, null)</td>
+        </tr>
+    }
+</table>
