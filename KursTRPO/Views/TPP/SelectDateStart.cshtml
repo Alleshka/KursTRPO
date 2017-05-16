@@ -1,0 +1,13 @@
+﻿@model KursTRPO.Models.TechnologicalProcesses
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div>
+        <p> @Html.Label("Номер процесса:") @Html.EditorFor(model => model.DateStartTechProc)</p>
+    </div>
+    <p><input type="submit" value="Сохранить" /></p>
+}
+
+
+

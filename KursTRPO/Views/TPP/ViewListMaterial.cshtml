@@ -21,7 +21,7 @@
             <td>@temp.Name</td>
             <td>@temp.Stamp</td>
             <td>@temp.DesignOfStandard</td>
-            <td>@Html.ActionLink("Выбрать", "", temp, null)</td>
+            <td>@Html.ActionLink("Выбрать", "SelectMaterial", new { i = @temp.MaterialId }, null)</td>
             <td>@Html.ActionLink("Удалить", "DeleteMaterial", temp, null)</td>
         </tr>
     }

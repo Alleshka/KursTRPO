@@ -209,6 +209,11 @@
     <Content Include="Views\TPP\SelectTransName.cshtml" />
     <Content Include="Views\TPP\SelectWorkPlace.cshtml" />
     <Content Include="Views\TPP\SelectNameTpp.cshtml" />
+    <Content Include="Views\TPP\SelectTypeTpp.cshtml" />
+    <Content Include="Views\TPP\SelectNumberAct.cshtml" />
+    <Content Include="Views\TPP\SelectDateStart.cshtml" />
+    <Content Include="Views\TPP\ClearAllCookies.cshtml" />
+    <Content Include="Views\Account\EditMyProfile.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

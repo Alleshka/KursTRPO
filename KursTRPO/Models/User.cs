@@ -26,6 +26,9 @@ namespace KursTRPO.Models
         public string Name { get; set; }
         public string LastName { get; set; }
         public string Position { get; set; }
+
+       // public string AllName { get; set; }
+
         public ApplicationUser()
         {
         }

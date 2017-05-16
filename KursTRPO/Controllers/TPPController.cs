@@ -61,6 +61,7 @@ namespace KursTRPO.Controllers
         private HttpCookie GetCoockieOperation()
         {
             HttpCookie temp = Request.Cookies[NameCookieOperation];
+
             if (temp != null)
             {
                 return temp;
@@ -75,6 +76,7 @@ namespace KursTRPO.Controllers
         {
             HttpCookie temp = new HttpCookie(NameCookieOperation);
             temp.Expires = DateTime.Now.AddDays(-5);
+            Response.Cookies.Add(temp);
         }
 
         // Куки ТПП
@@ -85,9 +87,9 @@ namespace KursTRPO.Controllers
             cookie["Name"] = "DefaultName";
             cookie["OperationId"] = "-1";
             cookie["MaterialId"] = "-1";
-            cookie["TypeByExecution"] = "-1";
+            cookie["TypeByExecution"] = "DefaultType";
             cookie["ActNumber"] = "-1";
-            cookie["DateStartTechProc"] = Convert.ToString(DateTime.Now);
+            cookie["DateStartTechProc"] = DateTime.Now.ToShortDateString();
             Response.Cookies.Add(cookie);
 
             return cookie;
@@ -126,7 +128,15 @@ namespace KursTRPO.Controllers
         private void ClearCookieTpp()
         {
             HttpCookie temp = new HttpCookie(NameCookieTpp);
-            temp.Expires = DateTime.Now.AddDays(-2);
+            temp.Expires = DateTime.Now.AddDays(-5);
+            Response.Cookies.Add(temp);
+        }
+
+        public ActionResult ClearAllCookies()
+        {
+            ClearCookieTpp();
+            ClearCookieOperation();
+            return RedirectToAction("Index", "Home");
         }
 
         // Детали
@@ -223,36 +233,7 @@ namespace KursTRPO.Controllers
             return RedirectToAction("ViewListRigging");
         }
 
-        // Маршрут
-        public ActionResult ViewListRoute()
-        {
-            TppContext db = new TppContext();
-            IEnumerable<Route> temp = db.Routes;
-            return View(temp);
-        }
-        public ActionResult AddRoute()
-        {
-            return View();
-        }
-        [HttpPost]
-        public ActionResult AddRoute(Route temp)
-        {
-            if (ModelState.IsValid)
-            {
-                TppContext db = new TppContext();
-                db.Routes.Add(temp);
-                db.SaveChanges();
-            }
-            return RedirectToAction("ViewListRoute");
-        }
-        public ActionResult DeleteRoute(Route temp)
-        {
-            TppContext db = new TppContext();
-            db.Routes.Remove(db.Routes.Find(temp.RouteId));
-            db.SaveChanges();
 
-            return RedirectToAction("ViewListRoute");
-        }
 
         // Маршрутная карта
         public ActionResult ViewListRouteCar()
@@ -484,6 +465,8 @@ namespace KursTRPO.Controllers
                 TppContext db = new TppContext();
                 db.TechnologicalProcesseses.Add(temp);
                 db.SaveChanges();
+
+                ClearCookieTpp();
             }
             return RedirectToAction("ViewListTechnologicalProcesses");
         }
@@ -504,7 +487,7 @@ namespace KursTRPO.Controllers
         [HttpPost]
         public ActionResult SelectNameTpp(string name)
         {
-            HttpCookie temp = GetCoockieOperation();
+            HttpCookie temp = GetCookieTpp();
             temp["Name"] = name;
             Response.Cookies.Add(temp);
 
@@ -524,6 +507,99 @@ namespace KursTRPO.Controllers
                 Operation temp = RefreshOperation();
                 return RedirectToAction("AddTechnologicalProcesses", temp);
             }
+        }
+        public ActionResult SelectMaterial(int i = -1)
+        {
+            if (i == -1)
+            {
+                return RedirectToAction("ViewListMaterial");
+            }
+            else
+            {
+                HttpCookie cookie = GetCookieTpp();
+                cookie["MaterialId"] = Convert.ToString(i);
+                Response.Cookies.Add(cookie);
+                Operation temp = RefreshOperation();
+                return RedirectToAction("AddTechnologicalProcesses", temp);
+            }
+        }
+
+        public ActionResult SelectTypeTpp()
+        {
+            TechnologicalProcesses temp = RefreshTpp();
+            return PartialView(temp);
+        }
+        [HttpPost]
+        public ActionResult SelectTypeTpp(TechnologicalProcesses name)
+        {
+            HttpCookie temp = GetCookieTpp();
+            temp["TypeByExecution"] = name.TypeByExecution;
+            Response.Cookies.Add(temp);
+
+            return RedirectToAction("AddTechnologicalProcesses");
+        }
+
+        public ActionResult SelectNumberAct()
+        {
+            TechnologicalProcesses temp = RefreshTpp();
+            return PartialView(temp);
+        }
+        [HttpPost]
+        public ActionResult SelectNumberAct(TechnologicalProcesses num)
+        {
+            HttpCookie cookie = GetCookieTpp();
+            cookie["ActNumber"] = Convert.ToString(num.ActNumber);
+            Response.Cookies.Add(cookie);
+
+            return RedirectToAction("AddTechnologicalProcesses");
+        }
+
+
+        public ActionResult SelectDateStart()
+        {
+            TechnologicalProcesses temp = RefreshTpp();
+            return PartialView(temp);
+        }
+        [HttpPost]
+        public ActionResult SelectDateStart(TechnologicalProcesses num)
+        {
+            HttpCookie cookie = GetCookieTpp();
+            cookie["DateStartTechProc"] = Convert.ToString(num.DateStartTechProc);
+            Response.Cookies.Add(cookie);
+
+            return RedirectToAction("AddTechnologicalProcesses");
+        }
+
+
+        // Пошли клепать маршрут
+        public ActionResult ViewListRoute()
+        {
+            TppContext db = new TppContext();
+            IEnumerable<Route> temp = db.Routes;
+            return View(temp);
+        }
+        public ActionResult AddRoute()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult AddRoute(Route temp)
+        {
+            if (ModelState.IsValid)
+            {
+                TppContext db = new TppContext();
+                db.Routes.Add(temp);
+                db.SaveChanges();
+            }
+            return RedirectToAction("ViewListRoute");
+        }
+        public ActionResult DeleteRoute(Route temp)
+        {
+            TppContext db = new TppContext();
+            db.Routes.Remove(db.Routes.Find(temp.RouteId));
+            db.SaveChanges();
+
+            return RedirectToAction("ViewListRoute");
         }
     }
 }

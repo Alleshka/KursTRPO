@@ -95,5 +95,28 @@ namespace AspNetIdentityApp.Controllers
             AuthenticationManager.SignOut();
             return RedirectToAction("Login");
         }
+
+
+        public ActionResult EditMyProfile()
+        {
+            string id = HttpContext.User.Identity.GetUserId();
+
+            ApplicationUser user = UserManager.FindById(id);
+            return View(user);
+        }
+        [HttpPost]
+        public ActionResult EditMyProfile(ApplicationUser modelUser)
+        {
+            ApplicationUser us = UserManager.FindById(modelUser.Id);
+
+            us.Name = modelUser.Name;
+            us.LastName = modelUser.LastName;
+            us.Position = modelUser.Position;
+
+            // us.AllName = us.LastName + " " + us.Name;
+
+            UserManager.Update(us);
+            return View();
+        }
     }
 }

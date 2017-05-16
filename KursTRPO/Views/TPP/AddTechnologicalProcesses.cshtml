@@ -23,29 +23,29 @@
         <tr align="center">
             <td>Код материала:</td>
             <td>@Model.MaterialId</td>
-            <td>@Html.ActionLink("Выбрать из БД", "", new { i = -1 })</td>
+            <td>@Html.ActionLink("Выбрать из БД", "SelectMaterial", new { i = -1 })</td>
         </tr>
 
         <tr align="center">
             <td>Тип по методу выполнения</td>
             <td>@Model.TypeByExecution</td>
-            <td>@Html.ActionLink("Указать", "", "Tpp")</td>
+            <td>@Html.ActionLink("Указать", "SelectTypeTpp", "Tpp")</td>
         </tr>
 
         <tr align="center">
             <td>Номер акта</td>
             <td>@Model.ActNumber</td>
-            <td>@Html.ActionLink("Выбрать из БД", "", new { i = -1 })</td>
+            <td>@Html.ActionLink("Указать", "SelectNumberAct")</td>
         </tr>
 
         <tr align="center">
             <td>Дата внедрения</td>
-            <td>@Model.DateStartTechProc</td>
-            <td>@Html.ActionLink("Указать", "")</td>
+            <td>@Model.DateStartTechProc.ToShortDateString()</td>
+            <td>@Html.ActionLink("Указать", "SelectDateStart")</td>
         </tr>
 
         <tr align="center">
-            <td align="center" colspan="3">@Html.ActionLink("Сохранить всё", "SaveOperation") </td>
+            <td align="center" colspan="3">@Html.ActionLink("Сохранить всё", "SaveTechnologicalProcesses") </td>
         </tr>
     </table>
 }
