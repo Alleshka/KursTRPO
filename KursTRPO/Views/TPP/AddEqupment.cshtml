@@ -1,0 +1,38 @@
+﻿@model KursTRPO.Models.AddEqupmentModel
+
+@{
+    ViewBag.Title = "AddEqupment";
+}
+
+<h2>AddEqupment</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary()
+
+    <table>
+        <tr>
+            <td>Название</td>
+            <td>@Html.EditorFor(x => x.Name)</td>
+        </tr>
+
+        <tr>
+            <td>Номер детали</td>
+            <td>@Html.EditorFor(x => x.DetailNumber)</td>
+        </tr>
+
+        <tr>
+            <td>Количество</td>
+            <td>@Html.EditorFor(x => x.Quntity)</td>
+        </tr>
+
+        <tr>
+            <td>Департамент</td>
+            <td>@Html.EditorFor(x => x.Department)</td>
+        </tr>
+
+    </table>
+
+    <input type="submit" value="Отправить" />
+}

@@ -1,0 +1,44 @@
+﻿@model KursTRPO.Models.AddTppModel
+
+@{
+    ViewBag.Title = "AddTpp";
+}
+
+<h2>AddTpp</h2>
+
+@using (Html.BeginForm())
+{
+    <table>
+        <tr>
+            <td>Название</td>
+            <td>@Html.EditorFor(x=>x.Name)</td>
+        </tr>
+
+        <tr>
+            <td>Код операции</td>
+            <td>@Html.ListBoxFor(x => x.selectedOperations, Model.operationList)</td>
+        </tr>
+
+        <tr>
+            <td>Код материала</td>
+            <td>@Html.DropDownListFor(x => x.MaterialId, Model.listmaterial)</td>
+        </tr>
+
+        <tr>
+            <td>Тип по методу выполнения</td>
+            <td>@Html.EditorFor(x=>x.TypeByExecution)</td>
+        </tr>
+
+        <tr>
+            <td>Номер акта</td>
+            <td>@Html.EditorFor(x => x.ActNumber)</td>
+        </tr>
+
+        <tr>
+            <td>Дата внедрения</td>
+            <td>@Html.EditorFor(x => x.DateStartTechProc)</td>
+        </tr>
+    </table>
+
+    <input type="submit" value="Добавить" />
+}

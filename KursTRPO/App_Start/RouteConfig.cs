@@ -14,16 +14,17 @@ namespace KursTRPO
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "ListView",
+                url: "ViewList/{action}",
+                defaults: new {controller = "TPP", action = "ViewList_Materials" });
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
 
-            routes.MapRoute(
-    name: "Default2",
-    url: "{controller}/{action}/{id}/{Operation}",
-    defaults: new { controller = "Tpp", action = "SelectTransition", id = UrlParameter.Optional, Operation = UrlParameter.Optional}
-);
+
         }
     }
 }

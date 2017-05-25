@@ -1,4 +1,4 @@
-﻿@model KursTRPO.Models.Material
+﻿@model KursTRPO.Models.AddMaterialModel
 
 @{
     ViewBag.Title = "AddMaterial";
@@ -8,45 +8,30 @@
 
 @using (Html.BeginForm())
 {
+    @Html.ValidationSummary()
 
-    <div>
-        Сортамент
-        <div>
-            @Html.EditorFor(model => model.Assortment)
-        </div>
-    </div>
+    <table>
+        <tr>
+            <td>Название</td>
+            <td>@Html.EditorFor(x=>x.Name)</td>
+        </tr>
 
-    <div>
-        Название материала
-        <div>
-            @Html.EditorFor(model => model.Name)
-        </div>
-    </div>
+        <tr>
+            <td>Сортамент</td>
+            <td>@Html.EditorFor(x => x.Assortment)</td>
+        </tr>
 
-    <div>
-        Марка
-        <div>
-            @Html.EditorFor(model => model.Stamp)
-        </div>
-    </div>
+        <tr>
+            <td>Печать</td>
+            <td>@Html.EditorFor(x => x.Stamp)</td>
+        </tr>
 
-    <div>
-        Обозначение стандарта
-        <div>
-            @Html.EditorFor(model => model.DesignOfStandard)
-        </div>
-    </div>
+        <tr>
+            <td>Обозначение стандарта</td>
+            <td>@Html.EditorFor(x => x.DesignOfStandart)</td>
+        </tr>
 
-    <div>
-        Технологический процесс
-        <div>
-           // Тут что-то будет
-        </div>
-    </div>
+    </table>
 
-    <div>
-        <div>
-            <input type="submit" value="Добавить" />
-        </div>
-    </div>
+    <input type="submit" value="Отправить" />
 }

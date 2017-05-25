@@ -1,605 +1,388 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using KursTRPO.Models;
-using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using ClosedXML.Excel;
+using System.IO;
+using System.Linq;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using Calabonga.Xml.Exports;
+
+
 
 namespace KursTRPO.Controllers
 {
+    [Authorize]
     public class TPPController : Controller
     {
-        private string NameCookieOperation = "OperationCookieLast";
-        private string NameCookieTpp = "TppCookieLast";
-
-        // Куки операции
-        private HttpCookie CreateCookieOperation()
+        private ApplicationUserManager UserManager
         {
-            HttpCookie cookie = new HttpCookie(NameCookieOperation);
-            cookie.Expires = DateTime.Now.AddDays(2);
-            // Задаём начальные куки
-            cookie["OperationId"] = "-1";
-            cookie["Name"] = "DefaultName";
-            cookie["Number"] = "-1";
-            cookie["TransitionId"] = "-1";
-            cookie["TransitionName"] = "DefaultName";
-            cookie["EquipmentId"] = "-1";
-            cookie["RiggingId"] = "-1";
-            cookie["DepartmentNumber"] = "-1";
-            cookie["SiteNumber"] = "-1";
-            cookie["WorkplaceNumber"] = "-1";
-            Response.Cookies.Add(cookie);
-
-            return cookie;
-        }
-        private Operation RefreshOperation()
-        {
-            Operation temp = new Operation();
-
-            HttpCookie cookieReq = Request.Cookies[NameCookieOperation];
-
-            if (cookieReq == null)
+            get
             {
-                cookieReq = CreateCookieOperation();
-            }
-
-            temp.OperationId = Convert.ToInt32(cookieReq["OperationId"]);
-            temp.Name = cookieReq["Name"];
-            temp.Number = Convert.ToInt32(cookieReq["Number"]);
-            temp.TransitionId = Convert.ToInt32(cookieReq["TransitionId"]);
-            temp.TransitionName = cookieReq["TransitionName"];
-            temp.EquipmentId = Convert.ToInt32(cookieReq["EquipmentId"]);
-            temp.RiggingId = Convert.ToInt32(cookieReq["RiggingId"]);
-            temp.DepartmentNumber = Convert.ToInt32(cookieReq["DepartmentNumber"]);
-            temp.SiteNumber = Convert.ToInt32(cookieReq["SiteNumber"]);
-            temp.WorkplaceNumber = Convert.ToInt32(cookieReq["WorkplaceNumber"]);
-
-
-            return temp;
-        }
-        private HttpCookie GetCoockieOperation()
-        {
-            HttpCookie temp = Request.Cookies[NameCookieOperation];
-
-            if (temp != null)
-            {
-                return temp;
-            }
-            else
-            {
-                return CreateCookieOperation();
-            }
-
-        }
-        private void ClearCookieOperation()
-        {
-            HttpCookie temp = new HttpCookie(NameCookieOperation);
-            temp.Expires = DateTime.Now.AddDays(-5);
-            Response.Cookies.Add(temp);
-        }
-
-        // Куки ТПП
-        private HttpCookie CreateCookieTpp()
-        {
-            HttpCookie cookie = new HttpCookie(NameCookieTpp);
-            cookie.Expires = DateTime.Now.AddDays(2);
-            cookie["Name"] = "DefaultName";
-            cookie["OperationId"] = "-1";
-            cookie["MaterialId"] = "-1";
-            cookie["TypeByExecution"] = "DefaultType";
-            cookie["ActNumber"] = "-1";
-            cookie["DateStartTechProc"] = DateTime.Now.ToShortDateString();
-            Response.Cookies.Add(cookie);
-
-            return cookie;
-        }
-        private TechnologicalProcesses RefreshTpp()
-        {
-            TechnologicalProcesses temp = new TechnologicalProcesses();
-            HttpCookie cookie = Request.Cookies[NameCookieTpp];
-
-            if (cookie == null)
-            {
-                cookie = CreateCookieTpp();
-            }
-
-            temp.Name = cookie["Name"];
-            temp.OperationId = Convert.ToInt32(cookie["OperationId"]);
-            temp.MaterialId = Convert.ToInt32(cookie["MaterialId"]);
-            temp.TypeByExecution = cookie["TypeByExecution"];
-            temp.ActNumber = Convert.ToInt32(cookie["ActNumber"]);
-            temp.DateStartTechProc = Convert.ToDateTime(cookie["DateStartTechProc"]);
-
-            return temp;
-        }
-        private HttpCookie GetCookieTpp()
-        {
-            HttpCookie temp = Request.Cookies[NameCookieTpp];
-            if (temp != null)
-            {
-                return temp;
-            }
-            else
-            {
-                return CreateCookieTpp();
+                return HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
             }
         }
-        private void ClearCookieTpp()
-        {
-            HttpCookie temp = new HttpCookie(NameCookieTpp);
-            temp.Expires = DateTime.Now.AddDays(-5);
-            Response.Cookies.Add(temp);
-        }
 
-        public ActionResult ClearAllCookies()
+        // <--------------- Просмотреть список ------------------->     
+        public ActionResult Materials()
         {
-            ClearCookieTpp();
-            ClearCookieOperation();
-            return RedirectToAction("Index", "Home");
-        }
+            TppContext dbTpp = new TppContext();
+            IEnumerable<Material> model = dbTpp.Materials;
 
-        // Детали
-        public ActionResult ViewListEquipment()
+            return View(model);
+        }
+        public ActionResult Equipments()
+        {
+            TppContext dbTpp = new TppContext();
+            IEnumerable<Equipment> model = dbTpp.Equipments;
+
+            return View(model);
+        }
+        public ActionResult Transitions()
+        {
+            TppContext dbTpp = new TppContext();
+            IEnumerable<Transition> model = dbTpp.Transitions;
+
+            return View(model);
+        }
+        public ActionResult Riggings()
+        {
+            TppContext dbTpp = new TppContext();
+            IEnumerable<Rigging> model = dbTpp.Riggings;
+
+            return View(model);
+        }
+        public ActionResult Operations()
         {
             TppContext db = new TppContext();
-            IEnumerable<Equipment> temp = db.Equipments;
-            return View(temp);
+            IEnumerable<Operation> model = db.Operations;
+
+            return View(model);
+
         }
-        public ActionResult AddEquipment()
+        public ActionResult TechnologicalProcesses()
         {
-            return View();
+            TppContext dbTpp = new TppContext();
+            IEnumerable<TechnologicalProcesses> model = dbTpp.TechnologicalProcesseses;
+
+            return View(model);
         }
-        [HttpPost]
-        public ActionResult AddEquipment(Equipment temp)
+        public ActionResult Routes()
         {
-            if (ModelState.IsValid)
+            TppContext dbTpp = new TppContext();
+
+            List<Route> routeList;
+            List<ViewRouteModel> routeViewList = new List<ViewRouteModel>();
+
+            routeList = dbTpp.Routes.ToList();
+
+            foreach (var temp in routeList)
             {
-                TppContext k = new TppContext();
-                k.Equipments.Add(temp);
-                k.SaveChanges();
+                ViewRouteModel mod = new ViewRouteModel();
+                mod._route = temp;
+                mod.DevelopNameString = UserManager.Users.First(x => x.Id == temp.NameOfDeveloper)._UserFIO;
+                routeViewList.Add(mod);
             }
 
-            return RedirectToAction("ViewListEquipment");
+            return View(routeViewList);
         }
-        public ActionResult DeleteEquipment(Equipment temp)
+        public ActionResult RouteCars()
         {
-            TppContext db = new TppContext();
-            db.Equipments.Remove(db.Equipments.Find(temp.EquipmentId));
-            db.SaveChanges();
+            TppContext dbTpp = new TppContext();
+            IEnumerable<RouteCar> model = dbTpp.RouteCars;
 
-            return RedirectToAction("ViewListEquipment");
+            List<ViewRouteCarModel> vrc = new List<ViewRouteCarModel>();
+
+            foreach (RouteCar temp in model)
+            {
+                ViewRouteCarModel v = new ViewRouteCarModel();
+                v._rc = temp;
+                v.AgreedString = UserManager.Users.Where(x => x.Id == temp.Agreed).First()._UserFIO;
+                v.ApprovedString = UserManager.Users.Where(x => x.Id == temp.Approved).First()._UserFIO;
+                v.CheckedString = UserManager.Users.Where(x => x.Id == temp.Checked).First()._UserFIO;
+                v.DeveloperString = UserManager.Users.Where(x => x.Id == temp.Developer).First()._UserFIO;
+                v.NormСontrollerString = UserManager.Users.Where(x => x.Id == temp.NormСontroller).First()._UserFIO;
+                vrc.Add(v);
+            }
+
+            return View(vrc);
         }
 
-        // Материал
-        public ActionResult ViewListMaterial()
-        {
-            TppContext db = new TppContext();
-            IEnumerable<Material> temp = db.Materials;
+        // <--------------- !Просмотреть список ------------------->
 
-            return View(temp);
-        }
+        // <--------------- Добавление ------------------->     
         public ActionResult AddMaterial()
         {
             return View();
         }
         [HttpPost]
-        public ActionResult AddMaterial(Material temp)
-        {
-            TppContext db = new TppContext();
-            db.Materials.Add(temp);
-            db.SaveChanges();
-
-            return RedirectToAction("ViewListMaterial");
-        }
-        public ActionResult DeleteMaterial(Material temp)
-        {
-            TppContext db = new TppContext();
-            db.Materials.Remove(db.Materials.Find(temp.MaterialId));
-            db.SaveChanges();
-
-            return RedirectToAction("ViewListMaterial");
-        }
-
-
-        // Остастка
-        public ActionResult ViewListRigging()
-        {
-            TppContext db = new TppContext();
-            IEnumerable<Rigging> temp = db.Riggings;
-            return View(temp);
-        }
-        public ActionResult AddRigging()
-        {
-            return View();
-        }
-        [HttpPost]
-        public ActionResult AddRigging(Rigging temp)
+        public ActionResult AddMaterial(AddMaterialModel model)
         {
             if (ModelState.IsValid)
             {
                 TppContext db = new TppContext();
-                db.Riggings.Add(temp);
+
+                Material temp = new Material
+                {
+                    Name = model.Name,
+                    Assortment = model.Assortment,
+                    DesignOfStandard = model.DesignOfStandart,
+                    Stamp = model.Stamp
+                };
+
+                db.Materials.Add(temp);
                 db.SaveChanges();
+                return RedirectToAction("Materials", "TPP");
             }
-            return RedirectToAction("ViewListRigging");
-        }
-        public ActionResult DeleteRigging(Rigging temp)
-        {
-            TppContext db = new TppContext();
-            db.Riggings.Remove(db.Riggings.Find(temp.RiggingId));
-            db.SaveChanges();
-
-            return RedirectToAction("ViewListRigging");
+            else
+            {
+                return View(model);
+            }
         }
 
-
-
-        // Маршрутная карта
-        public ActionResult ViewListRouteCar()
-        {
-            TppContext db = new TppContext();
-            IEnumerable<RouteCar> temp = db.RouteCars;
-            return View(temp);
-        }
-        public ActionResult AddRouteCar()
+        public ActionResult AddEqupment()
         {
             return View();
         }
         [HttpPost]
-        public ActionResult AddRouteCar(RouteCar temp)
+        public ActionResult AddEqupment(AddEqupmentModel model)
         {
             if (ModelState.IsValid)
             {
                 TppContext db = new TppContext();
-                db.RouteCars.Add(temp);
+
+                Equipment temp = new Equipment();
+                temp.Name = model.Name;
+                temp.Department = model.Department;
+                temp.DetailNumber = model.DetailNumber;
+                temp.Quantity = model.Quntity;
+
+                db.Equipments.Add(temp);
                 db.SaveChanges();
+
+                return RedirectToAction("Equipments", "TPP");
             }
-            return RedirectToAction("ViewListRouteCar");
-        }
-        public ActionResult DeleteRouteCar(RouteCar temp)
-        {
-            TppContext db = new TppContext();
-            db.RouteCars.Remove(db.RouteCars.Find(temp.RouteId));
-            db.SaveChanges();
-
-            return RedirectToAction("ViewListRouteCar");
+            else
+            {
+                return View(model);
+            }
         }
 
-        // Переход
-        public ActionResult ViewListTransition()
-        {
-            TppContext db = new TppContext();
-            IEnumerable<Transition> temp = db.Transitions;
-            return View(temp);
-        }
         public ActionResult AddTransition()
         {
             return View();
         }
         [HttpPost]
-        public ActionResult AddTransition(Transition temp)
+        public ActionResult AddTransition(AddTransitionModel model)
         {
             if (ModelState.IsValid)
             {
                 TppContext db = new TppContext();
+
+                Transition temp = new Transition();
+                temp.Keyword = model.KeyWord;
+                temp.TransitionNumber = model.TransitionNumber;
+                temp.TransitionType = model.TransitionType;
+
                 db.Transitions.Add(temp);
                 db.SaveChanges();
-            }
-            return RedirectToAction("ViewListTransition");
-        }
-        public ActionResult DeleteTransition(Transition temp)
-        {
-            TppContext db = new TppContext();
-            db.Transitions.Remove(db.Transitions.Find(temp.TransitionId));
-            db.SaveChanges();
 
-            return RedirectToAction("ViewListTransition");
-        }
-
-        // Операция
-        public ActionResult ViewListOperation()
-        {
-            TppContext db = new TppContext();
-            IEnumerable<Operation> temp = db.Operations;
-            return View(temp);
-        }
-        public ActionResult AddOperation()
-        {
-            // Создаём свой набор куки
-            Operation temp = RefreshOperation();
-
-            return View(temp);
-        }
-        public ActionResult SaveOperation()
-        {
-            HttpCookie coockie = GetCoockieOperation();
-            Operation temp = RefreshOperation();
-
-            TppContext db = new TppContext();
-            db.Operations.Add(temp);
-            db.SaveChanges();  // Добавили в БД
-            ClearCookieOperation(); // Мы же молодцы, убираем за собой
-
-            return RedirectToAction("ViewListOperation");
-        }
-        public ActionResult DeleteOperation(Operation temp)
-        {
-            TppContext db = new TppContext();
-            db.Operations.Remove(db.Operations.Find(temp.OperationId));
-            db.SaveChanges();
-
-            return RedirectToAction("ViewListOperation");
-        }
-
-        // Вот тут всё относится к заполнению операций.. ужас
-        public ActionResult SelectTransition(int i = -1)
-        {
-            if (i == -1)
-            {
-                return RedirectToAction("ViewListTransition");
+                return RedirectToAction("Transitions");
             }
             else
             {
-                HttpCookie cookie = GetCoockieOperation();
-                cookie["TransitionId"] = Convert.ToString(i);
-                Response.Cookies.Add(cookie);
-                Operation temp = RefreshOperation();
-                return RedirectToAction("AddOperation", temp);
-            }
-        }
-        public ActionResult SelectEquipment(int i = -1)
-        {
-            if (i == -1)
-            {
-                return RedirectToAction("ViewListEquipment");
-            }
-            else
-            {
-                HttpCookie cookie = GetCoockieOperation();
-                cookie["EquipmentId"] = Convert.ToString(i);
-
-                Response.Cookies.Add(cookie);
-                Operation temp = RefreshOperation();
-
-                return RedirectToAction("AddOperation", temp);
-            }
-        }
-        public ActionResult SelectRigging(int i = -1)
-        {
-            if (i == -1)
-            {
-                return RedirectToAction("ViewListRigging");
-            }
-            else
-            {
-                HttpCookie cookie = GetCoockieOperation();
-                cookie["RiggingId"] = Convert.ToString(i);
-
-                Response.Cookies.Add(cookie);
-                Operation temp = RefreshOperation();
-
-                return RedirectToAction("AddOperation", temp);
-            }
-        }
-        // Указать имя операции
-        public ActionResult SelectName()
-        {
-            Operation temp = RefreshOperation();
-            return PartialView(temp);
-        }
-        [HttpPost]
-        public ActionResult SelectName(string name)
-        {
-            HttpCookie temp = GetCoockieOperation();
-            temp["Name"] = name;
-            Response.Cookies.Add(temp);
-
-            return RedirectToAction("AddOperation");
-        }
-        // Указать номер операции
-        public ActionResult SelectNumber()
-        {
-            Operation temp = RefreshOperation();
-            return PartialView(temp);
-        }     
-        [HttpPost]
-        public ActionResult SelectNumber(Operation num)
-        {
-            HttpCookie cookie = GetCoockieOperation();
-            cookie["Number"] = Convert.ToString(num.Number);
-            Response.Cookies.Add(cookie);
-
-            return RedirectToAction("AddOperation"); 
-        }
-        public ActionResult SelectTransName()
-        {
-            Operation temp = RefreshOperation();
-            return PartialView(temp);
-        }
-        [HttpPost]
-        public ActionResult SelectTransName(string name)
-        {
-            HttpCookie cookie = GetCoockieOperation();
-            cookie["TransitionName"] = Convert.ToString(name);
-            Response.Cookies.Add(cookie);
-
-            return RedirectToAction("AddOperation");
-        }
-        public ActionResult SelectWorkPlace()
-        {
-            Operation temp = RefreshOperation();
-            return PartialView(temp);
-        }
-        [HttpPost]
-        public ActionResult SelectWorkPlace(Operation num)
-        {
-            HttpCookie cookie = GetCoockieOperation();
-            cookie["DepartmentNumber"] = Convert.ToString(num.DepartmentNumber);
-            cookie["SiteNumber"] = Convert.ToString(num.SiteNumber);
-            cookie["WorkplaceNumber"] = Convert.ToString(num.WorkplaceNumber);
-
-            Response.Cookies.Add(cookie);
-
-            return RedirectToAction("AddOperation");
-        }
-
-
-        // Технологический процесс
-        public ActionResult ViewListTechnologicalProcesses()
-        {
-            TppContext db = new TppContext();
-            IEnumerable<TechnologicalProcesses> temp = db.TechnologicalProcesseses;
-            return View(temp);
-        }
-        public ActionResult AddTechnologicalProcesses()
-        {
-            TechnologicalProcesses temp = RefreshTpp();
-            return View(temp);
-        }
-        public ActionResult SaveTechnologicalProcesses()
-        {
-            if (ModelState.IsValid)
-            {
-                TechnologicalProcesses temp = RefreshTpp();
-                TppContext db = new TppContext();
-                db.TechnologicalProcesseses.Add(temp);
-                db.SaveChanges();
-
-                ClearCookieTpp();
-            }
-            return RedirectToAction("ViewListTechnologicalProcesses");
-        }
-        public ActionResult DeleteTechnologicalProcesses(TechnologicalProcesses temp)
-        {
-            TppContext db = new TppContext();
-            db.TechnologicalProcesseses.Remove(db.TechnologicalProcesseses.Find(temp.TechProcId));
-            db.SaveChanges();
-
-            return RedirectToAction("ViewListTechnologicalProcesses");
-        }
-
-        public ActionResult SelectNameTpp()
-        {
-            TechnologicalProcesses temp = RefreshTpp();
-            return PartialView(temp);
-        }
-        [HttpPost]
-        public ActionResult SelectNameTpp(string name)
-        {
-            HttpCookie temp = GetCookieTpp();
-            temp["Name"] = name;
-            Response.Cookies.Add(temp);
-
-            return RedirectToAction("AddTechnologicalProcesses");
-        }
-        public ActionResult SelectOperation(int i = -1)
-        {
-            if (i == -1)
-            {
-                return RedirectToAction("ViewListOperation");
-            }
-            else
-            {
-                HttpCookie cookie = GetCookieTpp();
-                cookie["OperationId"] = Convert.ToString(i);
-                Response.Cookies.Add(cookie);
-                Operation temp = RefreshOperation();
-                return RedirectToAction("AddTechnologicalProcesses", temp);
-            }
-        }
-        public ActionResult SelectMaterial(int i = -1)
-        {
-            if (i == -1)
-            {
-                return RedirectToAction("ViewListMaterial");
-            }
-            else
-            {
-                HttpCookie cookie = GetCookieTpp();
-                cookie["MaterialId"] = Convert.ToString(i);
-                Response.Cookies.Add(cookie);
-                Operation temp = RefreshOperation();
-                return RedirectToAction("AddTechnologicalProcesses", temp);
+                return View(model);
             }
         }
 
-        public ActionResult SelectTypeTpp()
-        {
-            TechnologicalProcesses temp = RefreshTpp();
-            return PartialView(temp);
-        }
-        [HttpPost]
-        public ActionResult SelectTypeTpp(TechnologicalProcesses name)
-        {
-            HttpCookie temp = GetCookieTpp();
-            temp["TypeByExecution"] = name.TypeByExecution;
-            Response.Cookies.Add(temp);
-
-            return RedirectToAction("AddTechnologicalProcesses");
-        }
-
-        public ActionResult SelectNumberAct()
-        {
-            TechnologicalProcesses temp = RefreshTpp();
-            return PartialView(temp);
-        }
-        [HttpPost]
-        public ActionResult SelectNumberAct(TechnologicalProcesses num)
-        {
-            HttpCookie cookie = GetCookieTpp();
-            cookie["ActNumber"] = Convert.ToString(num.ActNumber);
-            Response.Cookies.Add(cookie);
-
-            return RedirectToAction("AddTechnologicalProcesses");
-        }
-
-
-        public ActionResult SelectDateStart()
-        {
-            TechnologicalProcesses temp = RefreshTpp();
-            return PartialView(temp);
-        }
-        [HttpPost]
-        public ActionResult SelectDateStart(TechnologicalProcesses num)
-        {
-            HttpCookie cookie = GetCookieTpp();
-            cookie["DateStartTechProc"] = Convert.ToString(num.DateStartTechProc);
-            Response.Cookies.Add(cookie);
-
-            return RedirectToAction("AddTechnologicalProcesses");
-        }
-
-
-        // Пошли клепать маршрут
-        public ActionResult ViewListRoute()
-        {
-            TppContext db = new TppContext();
-            IEnumerable<Route> temp = db.Routes;
-            return View(temp);
-        }
-        public ActionResult AddRoute()
+        public ActionResult AddRigging()
         {
             return View();
         }
         [HttpPost]
-        public ActionResult AddRoute(Route temp)
+        public ActionResult AddRigging(AddRiggingModel model)
         {
             if (ModelState.IsValid)
             {
                 TppContext db = new TppContext();
+
+                Rigging k = new Rigging();
+                k.Name = model.Name;
+                k.Quantity = model.Quntity;
+                k.TypeOfTool = model.TypeOfTool;
+
+                db.Riggings.Add(k);
+                db.SaveChanges();
+
+                return RedirectToAction("Riggings");
+            }
+            else
+            {
+                return View();
+            }
+        }
+
+        public ActionResult AddOperation()
+        {
+            AddOperationModel model = new AddOperationModel();
+
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult AddOperation(AddOperationModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Operation temp = new Operation();
+                temp.DepartmentNumber = model.DepartmentNumber;
+                temp.EquipmentId = model.EquipmentId;
+                temp.Name = model.Name;
+                temp.Number = model.Number;
+                temp.SiteNumber = model.SiteNumber;
+                temp.TransitionId = model.TransitionId;
+                temp.TransitionName = model.TransitionName;
+                temp.WorkplaceNumber = model.WorkplaceNumber;
+
+                TppContext db = new TppContext();
+                Transition tempTrans = db.Transitions.Find(temp.TransitionId);
+                temp.Transition = tempTrans;
+
+                Equipment tempEquip = db.Equipments.Find(temp.EquipmentId);
+                temp.Equipment = tempEquip;
+
+                // temp.Riggings = new List<Rigging>();
+                foreach (var tmp in model.selectRigging)
+                {
+                    Rigging tempRig = db.Riggings.Find(Convert.ToInt32(tmp));
+                    temp.Riggings.Add(tempRig);
+                }
+
+                db.Operations.Add(temp);
+                db.SaveChanges();
+
+                return RedirectToAction("Operations");
+            }
+            else
+            {
+                return View(model);
+            }
+        }
+
+        public ActionResult AddTpp()
+        {
+            AddTppModel model = new AddTppModel();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult AddTpp(AddTppModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                TechnologicalProcesses temp = new TechnologicalProcesses();
+                temp.Operations = new List<Operation>();
+
+                temp.Name = model.Name;
+                temp.MaterialId = model.MaterialId;
+                temp.TypeByExecution = model.TypeByExecution;
+                temp.ActNumber = model.ActNumber;
+                temp.DateStartTechProc = model.DateStartTechProc;
+
+                TppContext db = new TppContext();
+
+                foreach (var op in model.selectedOperations)
+                {
+                    Operation tempOp = db.Operations.Find(Convert.ToInt32(op));
+                    temp.Operations.Add(tempOp);
+                }
+
+                db.TechnologicalProcesseses.Add(temp);
+                db.SaveChanges();        
+
+                return RedirectToAction("TechnologicalProcesses");
+            }
+            else
+            {
+                return View(model);
+            }
+        }
+
+        public ActionResult AddRoute()
+        {
+            AddRouteModel model = new AddRouteModel();
+            model.SetDevelopList(UserManager.Users);
+
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult AddRoute(AddRouteModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                TppContext db = new TppContext();
+
+                Route temp = new Route();
+
+                temp.DetailsDesignation = model.DetailsDesignation;
+                temp.DetailsName = model.DetailsName;
+                temp.NameOfDeveloper = model.NameOfDeveloper;
+                temp.NameTechProc = model.NameTechProc;
+                temp.TechProcId = model.TechProcId;
+
                 db.Routes.Add(temp);
                 db.SaveChanges();
-            }
-            return RedirectToAction("ViewListRoute");
-        }
-        public ActionResult DeleteRoute(Route temp)
-        {
-            TppContext db = new TppContext();
-            db.Routes.Remove(db.Routes.Find(temp.RouteId));
-            db.SaveChanges();
 
-            return RedirectToAction("ViewListRoute");
+                return RedirectToAction("Routes");
+            }
+            else
+            {
+                return View(model);
+            }
+      
         }
+
+        public ActionResult AddRouteCar()
+        {
+            AddRouteCarModel model = new AddRouteCarModel();
+            model.SetDevelopList(UserManager.Users);
+
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult AddRouteCar(AddRouteCarModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                TppContext db = new TppContext();
+
+                RouteCar temp = new RouteCar();
+                temp.Agreed = model.Agreed;
+                temp.Approved = model.Approved;
+                temp.Checked = model.Checked;
+                temp.CompanyName = model.CompanyName;
+                temp.Developer = model.Developer;
+                temp.NormСontroller = model.NormСontroller;
+                temp.RouteId = model.RouteId;
+
+                db.RouteCars.Add(temp);
+                db.SaveChanges();
+
+                return RedirectToAction("RouteCars");
+            }
+            else
+            {
+                return View(model);
+            }
+        }
+        // <--------------- !Добавление ------------------->  
+
+        //// Скачать карту
+        //public ActionResult DownloadCard()
+        //{ 
+        //}
     }
 }

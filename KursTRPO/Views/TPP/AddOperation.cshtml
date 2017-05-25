@@ -1,5 +1,4 @@
-﻿@model KursTRPO.Models.Operation
-
+﻿@model KursTRPO.Models.AddOperationModel
 
 @{
     ViewBag.Title = "AddOperation";
@@ -9,85 +8,94 @@
 
 @using (Html.BeginForm())
 {
-    <table border="1">
-        <tr align="center">   
-            <td>Наменование</td>
-            <td>@Model.Name</td>
-            <td>@Html.ActionLink("Переименовать", "SelectName", "Tpp")</td>
-        </tr>
-        <tr align="center">
-            <td>Номер:</td>
-            <td>@Model.Number</td>
-            <td>@Html.ActionLink("Указать номер", "SelectNumber", "Tpp")</td>
+    @Html.ValidationSummary()
+
+    <table>
+        <tr>
+            <td>
+                Название
+            </td>
+            <td>
+                @Html.EditorFor(model => model.Name)
+            </td>
         </tr>
 
-        <tr align="center">
-            <td>Код перехода:</td>
-            <td>@Html.Label(Convert.ToString(Model.TransitionId))</td>
-            <td>@Html.ActionLink("Выбрать из БД", "SelectTransition", new { i = -1 })</td>
+        <tr>
+            <td>
+                Номер
+            </td>
+            <td>
+                @Html.EditorFor(model => model.Number)
+            </td>
         </tr>
 
-        <tr align="center">
-            <td>Название перехода</td>
-            <td>@Model.TransitionName</td>
-            <td>@Html.ActionLink("Переименовать", "SelectTransName", "Tpp")</td>
+        <tr>
+            <td>
+                Переход
+            </td>
+            <td>
+                @Html.DropDownListFor(model => model.TransitionId, Model.transList)
+            </td>
         </tr>
 
-        <tr align="center">
-            <td>Код оборудования:</td>
-            <td>@Html.Label(Convert.ToString(Model.EquipmentId))</td>
-            <td>@Html.ActionLink("Выбрать из БД", "SelectEquipment", new { i = -1 })</td>
+        <tr>
+            <td>
+                Название перехода
+            </td>
+            <td>
+                @Html.EditorFor(model => model.TransitionName)
+            </td>
         </tr>
 
-        <tr align="center">
-            <td>Код оснастки:</td>
-            <td>@Html.Label(Convert.ToString(Model.RiggingId))</td>
-            <td>@Html.ActionLink("Выбрать из БД", "SelectRigging", new { i = -1 })</td>
+        <tr>
+            <td>
+                Оборудование
+            </td>
+            <td>
+                @Html.DropDownListFor(model => model.EquipmentId, Model.equipList)
+            </td>
         </tr>
 
-        <tr align="center">
-            <td>Номер цеха:</td>
-            <td>@Model.DepartmentNumber</td>
-            <td>@Html.ActionLink("Указать номер", "SelectWorkPlace", "Tpp")</td>
+        <tr>
+            <td>
+                Оснастки
+            </td>
+            <td>
+                @Html.ListBoxFor(model => model.selectRigging, Model.riggingList)
+            </td>
         </tr>
 
-        <tr align="center">
-            <td>Номер участка:</td>
-            <td>@Model.SiteNumber</td>
-            <td>@Html.ActionLink("Указать номер", "SelectWorkPlace", "Tpp")</td>
+        <tr>
+            <td>
+                Номер цеха
+            </td>
+            <td>
+                @Html.EditorFor(model => model.DepartmentNumber)
+            </td>
         </tr>
 
-        <tr align="center">
-            <td>Номер рабочего места:</td>
-            <td>@Model.WorkplaceNumber</td>
-            <td>@Html.ActionLink("Указать номер", "SelectWorkPlace", "Tpp")</td>
+
+        <tr>
+            <td>
+                Номер участка
+            </td>
+            <td>
+                @Html.EditorFor(model => model.SiteNumber)
+            </td>
         </tr>
 
-        <tr align="center">
-            <td align="center" colspan="3">@Html.ActionLink("Сохранить всё", "SaveOperation") </td >
+
+        <tr>
+            <td>
+                Номер места
+            </td>
+            <td>
+                @Html.EditorFor(model => model.WorkplaceNumber);
+            </td>
         </tr>
+
+
+
     </table>
+    <input type="submit" value="Добавить" />
 }
-
-<script src='@Url.Content("~/Scripts/jquery-1.12.4.min.js")' type="text/javascript"></script>
-<script src='@Url.Content("~/Scripts/jquery-ui-1.12.1.min.js")' type="text/javascript"></script>
-<script>
-    $(document).ready(function () {
-
-        $.ajaxSetup({ cache: false });
-
-        $(".viewDialog").on("click", function (e) {
-            e.preventDefault();
-
-            $("<div></div>")
-                .addClass("dialog")
-                .appendTo("body")
-                .dialog({
-                    title: $(this).attr("data-dialog-title"),
-                     close: function () { $(this).remove() },
-                    modal: true
-                })
-                .load(this.href);
-        });
-    });
-</script>

@@ -6,8 +6,9 @@
 }
 
 <h2>@ViewBag.Title</h2>
-<table>
-    <tr>
+
+<table border="1" width="100%">
+    <tr align="center">
         <td>Код перехода</td>
         <td>Номер перехода</td>
         <td>Ключевое слово</td>
@@ -16,14 +17,11 @@
 
     @foreach (KursTRPO.Models.Transition temp in Model)
     {
-        <tr>
+        <tr align="center">
             <td>@temp.TransitionId</td>
             <td>@temp.TransitionNumber</td>
             <td>@temp.Keyword</td>
             <td>@temp.TransitionType</td>
-
-            <td>@Html.ActionLink("Выбрать", "SelectTransition", new { i = @temp.TransitionId})</td>
-            <td>@Html.ActionLink("Удалить", "DeleteTransition", temp, null)</td>
         </tr>
     }
 </table>

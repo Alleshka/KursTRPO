@@ -1,5 +1,4 @@
-﻿// маршрутная машина ????
-@model KursTRPO.Models.RouteCar
+﻿@model KursTRPO.Models.AddRouteCarModel
 
 @{
     ViewBag.Title = "AddRouteCar";
@@ -9,61 +8,66 @@
 
 @using (Html.BeginForm())
 {
+    @Html.ValidationSummary()
 
-    // TODO: сделано по шаблону с абсолютным непониманием конечной цели, проверить на ошибки
+    <table>        
+        <tr>
+            <td>
+                Название предприятия
+            </td>
+            <td>@Html.EditorFor(x => x.CompanyName)</td>
+        </tr>
 
-    <div>
-        Номер маршрута:
-        <div>
-            @Html.EditorFor(model => model.RouteCarId)
-        </div>
-    </div>
+        <tr>
+            <td>
+                Номер маршрута
+            </td>
+            <td>@Html.DropDownListFor(x => x.RouteId, Model.routeList)</td>
+        </tr>
 
-    <div>
-        Название предприятия:
-        <div>
-            @Html.EditorFor(model => model.CompanyName)
-        </div>
-    </div>
+        <tr>
+            <td>
+                Разработал
+            </td>
+            <td>@Html.DropDownListFor(x => x.Developer, @Model.developList)</td>
+        </tr>
 
-    <div>
-        Разработал:
-        <div>
-            @Html.EditorFor(model => model.Developer)
-        </div>
-    </div>
+        <tr>
+            <td>
+                Проверил
+            </td>
+            <td>@Html.DropDownListFor(x => x.Checked, @Model.developList)</td>
+        </tr>
 
-    <div>
-        Проверил:
-        <div>
-            @Html.EditorFor(model => model.Checked)
-        </div>
-    </div>
+        <tr>
+            <td>
+                Согласовано
+            </td>
+            <td>@Html.DropDownListFor(x => x.Approved, @Model.developList)</td>
+        </tr>
 
-    <div>
-        Согласовано:
-        <div>
-            @Html.EditorFor(model => model.Agreed)
-        </div>
-    </div>
+        <tr>
+            <td>
+                Согласовано
+            </td>
+            <td>@Html.DropDownListFor(x => x.Agreed, @Model.developList)</td>
+        </tr>
 
-    <div>
-        Утвердил:
-        <div>
-            @Html.EditorFor(model => model.Approved)
-        </div>
-    </div>
+        <tr>
+            <td>
+                Утвердил
+            </td>
+            <td>@Html.DropDownListFor(x => x.Approved, @Model.developList)</td>
+        </tr>
 
-    <div>
-        Нормоконтроллер:
-        <div>
-            @Html.EditorFor(model => model.NormСontroller)
-        </div>
-    </div>
-    
-    <div>
-        <div>
-            <input type="submit" value="Добавить" />
-        </div>
-    </div>
+        <tr>
+            <td>
+                Нормконтроллер
+            </td>
+            <td>@Html.DropDownListFor(x => x.NormСontroller, @Model.developList)</td>
+        </tr>
+
+    </table>
+
+    <input type="submit" value="Отправить" />
 }

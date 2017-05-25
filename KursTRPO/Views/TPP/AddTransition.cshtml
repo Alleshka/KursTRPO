@@ -1,39 +1,42 @@
-﻿
-@model KursTRPO.Models.Transition
+﻿@model KursTRPO.Models.AddTransitionModel
 
 @{
     ViewBag.Title = "AddTransition";
 }
 
-<h2>Добавить переход</h2>
+<h2>AddTransition</h2>
 
 @using (Html.BeginForm())
 {
+    @Html.ValidationSummary()
 
-    <div>
-        Номер перхода:
-        <div>
-            @Html.EditorFor(model => model.TransitionNumber)
-        </div>
-    </div>
+<table>
+    <tr>
+        <td>
+            Номер перехода
+        </td>
+        <td>
+            @Html.EditorFor(x => x.TransitionNumber)
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Ключевое слов
+        </td>
+        <td>
+            @Html.EditorFor(x => x.KeyWord)
+        </td>
+    </tr>
 
-    <div>
-        Ключевое слово:
-        <div>
-            @Html.EditorFor(model => model.Keyword)
-        </div>
-    </div>
+    <tr>
+        <td>
+            Вид перехода
+        </td>
+        <td>
+            @Html.EditorFor(x => x.TransitionType)
+        </td>
+    </tr>
+</table>
 
-    <div>
-        Вид перехода:
-        <div>
-            @Html.EditorFor(model => model.TransitionType)
-        </div>
-    </div>
-    
-    <div>
-        <div>
-            <input type="submit" value="Добавить" />
-        </div>
-    </div>
+<input type="submit" value="Отправить" />
 }

@@ -1,0 +1,37 @@
+﻿@model IEnumerable<KursTRPO.Models.ViewRouteCarModel>
+
+
+@{
+    ViewBag.Title = "Список маршрутных карт";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<table width="100%" border="1">
+    <tr align="center">
+        <td>Код маршрутной карты</td>
+        <td>Номер маршрута</td>
+        <td>Название предприятия</td>
+        <td>Разработал</td>
+        <td>Проверил</td>
+        <td>Согласовано</td>
+        <td>Утвердил</td>
+        <td>Нормконтроллер</td>
+    </tr>
+
+    @foreach (KursTRPO.Models.ViewRouteCarModel temp in Model)
+    {
+        <tr align="center">
+            <td>@temp._rc.RouteCarId</td>
+            <td>@temp._rc.RouteId</td>
+            <td>@temp._rc.CompanyName</td>
+            <td>@temp.DeveloperString</td>
+            <td>@temp.CheckedString</td>
+            <td>@temp.AgreedString</td>
+            <td>@temp.ApprovedString</td>
+            <td>@temp.NormСontrollerString</td>
+        </tr>
+    }
+</table>
+
+@Html.ActionLink("Скачать", "DownloadCard");

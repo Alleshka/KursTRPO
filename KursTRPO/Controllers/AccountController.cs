@@ -31,7 +31,14 @@ namespace AspNetIdentityApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                ApplicationUser user = new ApplicationUser { UserName = model.Email, Email = model.Email};
+                ApplicationUser user = new ApplicationUser {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    _UserName = model._UserName,
+                    _UserLasName = model._UserLasName,
+                    _UserFIO = model._UserName + " " + model._UserLasName,
+                    _CompanyName = model._CompanyName
+                };
                 IdentityResult result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -94,29 +101,6 @@ namespace AspNetIdentityApp.Controllers
         {
             AuthenticationManager.SignOut();
             return RedirectToAction("Login");
-        }
-
-
-        public ActionResult EditMyProfile()
-        {
-            string id = HttpContext.User.Identity.GetUserId();
-
-            ApplicationUser user = UserManager.FindById(id);
-            return View(user);
-        }
-        [HttpPost]
-        public ActionResult EditMyProfile(ApplicationUser modelUser)
-        {
-            ApplicationUser us = UserManager.FindById(modelUser.Id);
-
-            us.Name = modelUser.Name;
-            us.LastName = modelUser.LastName;
-            us.Position = modelUser.Position;
-
-            // us.AllName = us.LastName + " " + us.Name;
-
-            UserManager.Update(us);
-            return View();
         }
     }
 }

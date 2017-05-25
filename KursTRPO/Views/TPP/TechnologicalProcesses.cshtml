@@ -7,8 +7,8 @@
 
 <h2>@ViewBag.Title</h2>
 
-<table>
-    <tr>
+<table width="100%" border="1">
+    <tr align="center">
         <td>Код тех. процесса</td>
         <td>Наименование</td>
         <td>Код операции</td>
@@ -21,17 +21,20 @@
 
     @foreach (KursTRPO.Models.TechnologicalProcesses temp in Model)
     {
-        <tr>
+        <tr align="center">
             <td>@temp.TechProcId</td>
             <td>@temp.Name</td>
-            <td>@temp.OperationId</td>
+            <td>
+                @foreach (KursTRPO.Models.Operation opertemp in temp.Operations)
+                {
+                    @opertemp.Number
+                    <br />
+                }
+            </td>
             <td>@temp.MaterialId</td>
             <td>@temp.TypeByExecution</td>
             <td>@temp.ActNumber</td>
             <td>@temp.DateStartTechProc</td>
-
-            <td>@Html.ActionLink("Выбрать", "", temp, null)</td>
-            <td>@Html.ActionLink("Удалить", "DeleteTechnologicalProcesses", temp, null)</td>
         </tr>
     }
 </table>

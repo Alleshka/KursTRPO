@@ -1,0 +1,44 @@
+﻿@model IEnumerable<KursTRPO.Models.Operation>
+
+
+@{
+    ViewBag.Title = "Список операций";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<table width="100%" border="1">
+    <tr align="center">
+        <td>Код операции</td>
+        <td>Наименование</td>
+        <td>Номер</td>
+        <td>Код перехода</td>
+        <td>Название перехода</td>
+        <td>Код оборудования</td>
+        <td>Код оснастки</td>
+        <td>Номер цеха</td>
+        <td>Номер участка</td>
+        <td>Номер рабочего места</td>
+    </tr>
+    @foreach (KursTRPO.Models.Operation oper in Model)
+    {
+        <tr align="center">
+            <td>@oper.OperationId</td>
+            <td>@oper.Name</td>
+            <td>@oper.Number</td>
+            <td>@oper.TransitionId</td>
+            <td>@oper.TransitionName</td>
+            <td>@oper.EquipmentId</td>
+            <td>
+                    @foreach (var rig in oper.Riggings)
+                    {
+                        Html.DisplayFor(x => rig.RiggingId);
+                        <br />
+                    }
+            </td>
+            <td>@oper.DepartmentNumber</td>
+            <td>@oper.SiteNumber</td>
+            <td>@oper.WorkplaceNumber</td>
+        </tr>
+    }
+</table>

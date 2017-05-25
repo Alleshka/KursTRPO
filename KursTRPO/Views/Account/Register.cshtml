@@ -38,6 +38,27 @@
         </div>
 
         <div>
+            Имя
+            <div>
+                @Html.EditorFor(model => model._UserName)
+            </div>
+        </div>
+
+        <div>
+            Фамилия
+            <div>
+                @Html.EditorFor(model => model._UserLasName)
+            </div>
+        </div>
+
+        <div>
+            Компания
+            <div>
+                @Html.EditorFor(model => model._CompanyName)
+            </div>
+        </div>
+
+        <div>
             <div>
                 <input type="submit" value="Зарегистрировать" />
             </div>

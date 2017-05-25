@@ -17,8 +17,5 @@
         public DbSet<Transition> Transitions { get; set; }
         public DbSet<Material> Materials { get; set; }
         public DbSet<Rigging> Riggings { get; set; }    
-
-        
-
     }
 }

@@ -1,0 +1,31 @@
+﻿@model IEnumerable<KursTRPO.Models.ViewRouteModel>
+
+@{
+    ViewBag.Title = "Список маршрутов";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<table border="1" width="100%">
+    <tr align="center">
+        <td>Код маршрута</td>
+        <td>Код ТП</td>
+        <td>Название ТП</td>
+        <td>Фио разработчика</td>
+        <td>Обозначение детали</td>
+        <td>Имя детали</td>
+    </tr>
+
+
+    @foreach (KursTRPO.Models.ViewRouteModel temp in Model)
+    {
+        <tr align="center">
+            <td>@temp._route.RouteId</td>
+            <td>@temp._route.TechProcId</td>
+            <td>@temp._route.NameTechProc</td>
+            <td>@temp.DevelopNameString</td>
+            <td>@temp._route.DetailsDesignation</td>
+            <td>@temp._route.DetailsDesignation</td>
+        </tr>
+    }
+</table>

@@ -1,20 +1,8 @@
-﻿@model KursTRPO.Models.ApplicationUser
+﻿@model KursTRPO.Models.User
 
 @using (Html.BeginForm())
 {
     <table>
-        <tr>
-            <td>Имя:</td>
-            <td>@Html.EditorFor(model=>model.Name)</td>
-        </tr>
-        <tr>
-            <td>Фамилия:</td>
-            <td>@Html.EditorFor(model => model.LastName)</td>
-        </tr>
-        <tr>
-            <td>Должность:</td>
-            <td>@Html.EditorFor(model => model.Position)</td>
-        </tr>
-        <tr><td align="center" colspan="2"><input type="submit" value="Сохранить" /></td></tr>
+       
     </table>
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace KursTRPO.Models
 {
@@ -18,7 +19,18 @@ namespace KursTRPO.Models
 
         public string TransitionType { get; set; }
 
-        public ICollection<Operation> Operations { get; set; }
-        
+        public ICollection<Operation> Operations { get; set; }      
+    }
+
+    public class AddTransitionModel
+    {
+        [Required(ErrorMessage ="Заполните поле «Номер»")]
+        public int TransitionNumber { get; set; }
+
+        [Required(ErrorMessage ="Заполните номер «Ключевое слово»")]
+        public string KeyWord { get; set; }
+
+        [Required(ErrorMessage ="Заполните поле «Вид перехода»")]
+        public string TransitionType { get; set; }
     }
 }

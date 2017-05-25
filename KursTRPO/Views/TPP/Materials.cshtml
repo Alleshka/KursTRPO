@@ -5,24 +5,22 @@
 }
 
 <h2>Список материалов</h2>
-<table width="100%">
+<table width="100%" border="1">
     <tr align="center">
         <td>Код материала</td>
-        <td>Сортамент</td>
         <td>Название</td>
-        <td>Марка</td>
+        <td>Сортамент</td>
+        <td>Печать</td>
         <td>Обозначение стандарта</td>
     </tr>
     @foreach (KursTRPO.Models.Material temp in Model)
     {
         <tr align="center">
             <td>@temp.MaterialId</td>
-            <td>@temp.Assortment</td>
             <td>@temp.Name</td>
+            <td>@temp.Assortment</td>
             <td>@temp.Stamp</td>
             <td>@temp.DesignOfStandard</td>
-            <td>@Html.ActionLink("Выбрать", "SelectMaterial", new { i = @temp.MaterialId }, null)</td>
-            <td>@Html.ActionLink("Удалить", "DeleteMaterial", temp, null)</td>
         </tr>
     }
 </table>

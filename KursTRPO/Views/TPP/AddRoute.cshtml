@@ -1,5 +1,4 @@
-﻿
-@model KursTRPO.Models.Route
+﻿@model KursTRPO.Models.AddRouteModel
 
 @{
     ViewBag.Title = "AddRoute";
@@ -9,47 +8,35 @@
 
 @using (Html.BeginForm())
 {
+    @Html.ValidationSummary()
 
-    // TODO: сделано по шаблону с абсолютным непониманием конечной цели, проверить на ошибки
+    <table>
+        <tr>
+            <td>Код ТП</td>
+            <td>@Html.DropDownListFor(x=>x.TechProcId, Model.techprocList) </td>
+        </tr>
 
-    <div>
-        Код ТП:
-        <div>
-            @Html.EditorFor(model => model.TechProcId)
-        </div>
-    </div>
+        <tr>
+            <td>Название ТП</td>
+            <td>@Html.EditorFor(x=>x.NameTechProc)</td>
+        </tr>
 
-    <div>
-        Название ТП:
-        <div>
-            @Html.EditorFor(model => model.NameTechProc)
-        </div>
-    </div>
+        <tr>
+            <td>Разработчик</td>
+            <td>@Html.DropDownListFor(x=>x.NameOfDeveloper, @Model.developList)</td>
+        </tr>
 
-    <div>
-        Ф.И.О разработчика:
-        <div>
-            @Html.EditorFor(model => model.NameOfDeveloper)
-        </div>
-    </div>
+        <tr>
+            <td>Обозначение детали</td>
+            <td>@Html.EditorFor(x => x.DetailsDesignation)</td>
+        </tr>
 
-    <div>
-        Обозначение детали:
-        <div>
-            @Html.EditorFor(model => model.DetailsDesignation)
-        </div>
-    </div>
 
-    <div>
-        Имя детали:
-        <div>
-            @Html.EditorFor(model => model.DetailsName)
-        </div>
-    </div>
+        <tr>
+            <td>Имя детали</td>
+            <td>@Html.EditorFor(x => x.DetailsName)</td>
+        </tr>
+    </table>
 
-    <div>
-        <div>
-            <input type="submit" value="Добавить" />
-        </div>
-    </div>
+    <input type="submit" value="Добавить" />
 }

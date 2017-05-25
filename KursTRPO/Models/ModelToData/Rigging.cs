@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace KursTRPO.Models
 {
@@ -8,7 +9,7 @@ namespace KursTRPO.Models
     {
         public Rigging()
         {
-            Operations = new List<Operation>();
+            Operations = new HashSet<Operation>();
         }
         public int RiggingId { get; set; }
 
@@ -18,7 +19,18 @@ namespace KursTRPO.Models
 
         public int Quantity { get; set; }
 
+        
         public ICollection<Operation> Operations { get; set; }
+    }
 
+
+    public class AddRiggingModel
+    {
+        [Required(ErrorMessage = "Заполните поле «Название»")]
+        public string Name { get; set; }
+        [Required(ErrorMessage ="Заполните поле «Вид инструмента»")]
+        public string TypeOfTool { get; set; }
+        [Required(ErrorMessage ="Заполните поле «Количество»")]
+        public int Quntity { get; set; }
     }
 }
