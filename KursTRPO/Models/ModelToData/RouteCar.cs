@@ -25,7 +25,7 @@ namespace KursTRPO.Models
 
         public string NormСontroller { get; set; }
         [ForeignKey("RouteId")]
-        public Route Route { get; set; }
+        public virtual Route Route { get; set; }
     }
     public class AddRouteCarModel
     {

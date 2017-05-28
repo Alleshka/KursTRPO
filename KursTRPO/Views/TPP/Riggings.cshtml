@@ -23,6 +23,11 @@
             <td>@temp.Name</td>
             <td>@temp.TypeOfTool</td>
             <td>@temp.Quantity</td>
+            <td>
+                @Html.ActionLink("Удалить", "DeleteRigging", new { i = @temp.RiggingId })
+            <br />
+            @Html.ActionLink("Редактировать", "EditRigging", new { i = @temp.RiggingId })
+</td>
         </tr>
     }
 

@@ -4,13 +4,13 @@
     ViewBag.Title = "AddTpp";
 }
 
-<h2>AddTpp</h2>
+<h2>Добавить технологический процесс</h2>
 
 @using (Html.BeginForm())
 {
     <table>
         <tr>
-            <td>Название</td>
+            <td>Наименование</td>
             <td>@Html.EditorFor(x=>x.Name)</td>
         </tr>
 

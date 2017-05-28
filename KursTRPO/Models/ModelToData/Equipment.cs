@@ -22,7 +22,7 @@ namespace KursTRPO.Models
 
         public string Department { get; set; }
 
-        public ICollection<Operation> Operations { get; set; }  
+        public virtual ICollection<Operation> Operations { get; set; }  
     }
 
     public class AddEqupmentModel

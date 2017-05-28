@@ -25,7 +25,7 @@ namespace KursTRPO.Models
 
         public int EquipmentId { get; set; }
 
-        public ICollection<Rigging> Riggings { get; set; }
+        public virtual ICollection<Rigging> Riggings { get; set; }
 
         public int DepartmentNumber { get; set; }
 
@@ -33,13 +33,13 @@ namespace KursTRPO.Models
 
         public int WorkplaceNumber { get; set; }
 
-        public ICollection<TechnologicalProcesses> TechnologicalProcesseses { get; set; }
+        public virtual ICollection<TechnologicalProcesses> TechnologicalProcesseses { get; set; }
 
         [ForeignKey("EquipmentId")]
-        public Equipment Equipment { get; set; }
+        public virtual Equipment Equipment { get; set; }
 
         [ForeignKey("TransitionId")]
-        public Transition Transition { get; set; }
+        public virtual Transition Transition { get; set; }
     }
 
 
@@ -81,7 +81,6 @@ namespace KursTRPO.Models
             TppContext db = new TppContext();
 
             List<SelectListItem> temp = new List<SelectListItem>();
-
             temp = new List<SelectListItem>();
             foreach (Equipment eq in db.Equipments)
             {

@@ -5,7 +5,7 @@
     ViewBag.Title = "Список деталей";
 }
 
-<h2>Список деталей</h2>
+<h2>Оборудование</h2>
 
 <table width="100%" border="1">
     <tr align="center">
@@ -23,6 +23,9 @@
             <td> @temp.Name</td>
             <td>@temp.Quantity </td>
             <td>@temp.Department</td>
+            <td>@Html.ActionLink("Удалить", "DeleteEquipment", new { i = @temp.EquipmentId })
+            <br />
+                @Html.ActionLink("Редактировать", "EditEquipment", new { i = @temp.EquipmentId })</td>
         </tr>
     }
 

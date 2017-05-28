@@ -27,12 +27,12 @@ namespace KursTRPO.Models
 
         [Column(TypeName ="datetime2")]
         public DateTime DateStartTechProc { get; set; }
-        public ICollection<Route> Routes { get; set; }
+        public virtual ICollection<Route> Routes { get; set; }
 
         [ForeignKey("MaterialId")]
-        public Material Material { get; set; }
+        public virtual Material Material { get; set; }
 
-        public ICollection<Operation> Operations { get; set; }       
+        public virtual ICollection<Operation> Operations { get; set; }       
     }
 
     public class AddTppModel

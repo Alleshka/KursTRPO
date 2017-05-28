@@ -29,10 +29,10 @@ namespace KursTRPO.Models
 
         public string DetailsName { get; set; }
 
-        public ICollection<RouteCar> RouteCars { get; set; }
+        public virtual ICollection<RouteCar> RouteCars { get; set; }
         
         [ForeignKey("TechProcId")]
-        public TechnologicalProcesses TechnologicalProcesses { get; set; }
+        public virtual TechnologicalProcesses TechnologicalProcesses { get; set; }
     }
 
     public class AddRouteModel

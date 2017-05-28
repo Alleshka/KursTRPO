@@ -26,6 +26,7 @@
             <td>@temp.DevelopNameString</td>
             <td>@temp._route.DetailsDesignation</td>
             <td>@temp._route.DetailsDesignation</td>
+            <td>@Html.ActionLink("Удалить", "DeleteRoute", new { i = @temp._route.RouteId })</td>
         </tr>
     }
 </table>

@@ -1,7 +1,7 @@
-﻿@model KursTRPO.Models.AddMaterialModel
+﻿@model KursTRPO.Models.Material
 
 @{
-    ViewBag.Title = "AddMaterial";
+    ViewBag.Title = "EditMaterial";
 }
 
 <h2>Добавить материал</h2>
@@ -12,8 +12,12 @@
 
     <table>
         <tr>
+            <td>@Html.HiddenFor(x=>x.MaterialId)</td>
+        </tr>
+
+        <tr>
             <td>Название</td>
-            <td>@Html.EditorFor(x=>x.Name)</td>
+            <td>@Html.EditorFor(x => x.Name)</td>
         </tr>
 
         <tr>
@@ -28,10 +32,10 @@
 
         <tr>
             <td>Обозначение стандарта</td>
-            <td>@Html.EditorFor(x => x.DesignOfStandart)</td>
+            <td>@Html.EditorFor(x => x.DesignOfStandard)</td>
         </tr>
 
     </table>
 
-    <input type="submit" value="Отправить" />
+    <input type="submit" value="Сохранить" />
 }

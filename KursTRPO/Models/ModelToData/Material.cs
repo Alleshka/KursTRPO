@@ -20,7 +20,7 @@ namespace KursTRPO.Models
         public string Stamp { get; set; }
 
         public string DesignOfStandard { get; set; }
-        public ICollection<TechnologicalProcesses> TechnologicalProcesseses { get; set; }
+        public virtual ICollection<TechnologicalProcesses> TechnologicalProcesseses { get; set; }
     }
 
     public class AddMaterialModel

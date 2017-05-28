@@ -35,6 +35,7 @@
             <td>@temp.TypeByExecution</td>
             <td>@temp.ActNumber</td>
             <td>@temp.DateStartTechProc</td>
+            <td>@Html.ActionLink("Удалить", "DeleteTPP", new { i = @temp.TechProcId })</td>
         </tr>
     }
 </table>

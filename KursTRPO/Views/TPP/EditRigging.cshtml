@@ -1,4 +1,4 @@
-﻿@model KursTRPO.Models.AddRiggingModel
+﻿@model KursTRPO.Models.Rigging
 
 @{
     ViewBag.Title = "AddRigging";
@@ -11,14 +11,15 @@
     @Html.ValidationSummary()
 
     <table>
+        @Html.HiddenFor(x => x.RiggingId)
         <tr>
             <td>Наименование</td>
-            <td>@Html.EditorFor(x=>x.Name)</td>
+            <td>@Html.EditorFor(x => x.Name)</td>
         </tr>
 
         <tr>
             <td>Количество</td>
-            <td>@Html.EditorFor(x => x.Quntity)</td>
+            <td>@Html.EditorFor(x => x.Quantity)</td>
         </tr>
 
         <tr>
@@ -27,5 +28,5 @@
         </tr>
     </table>
 
-    <input type="submit" value="Добавить" />
+    <input type="submit" value="Сохранить" />
 }

@@ -20,7 +20,7 @@ namespace KursTRPO.Models
         public int Quantity { get; set; }
 
         
-        public ICollection<Operation> Operations { get; set; }
+        public virtual ICollection<Operation> Operations { get; set; }
     }
 
 

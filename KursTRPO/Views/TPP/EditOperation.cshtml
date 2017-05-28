@@ -1,4 +1,4 @@
-﻿@model KursTRPO.Models.AddOperationModel
+﻿@model KursTRPO.Models.Operation
 
 @{
     ViewBag.Title = "AddOperation";
@@ -11,6 +11,7 @@
     @Html.ValidationSummary()
 
     <table>
+        @Html.HiddenFor(x=>x.EquipmentId)
         <tr>
             <td>
                 Название
@@ -97,5 +98,5 @@
 
 
     </table>
-    <input type="submit" value="Добавить" />
+    <input type="submit" value="Сохранить" />
 }

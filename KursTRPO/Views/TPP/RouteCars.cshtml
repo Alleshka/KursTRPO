@@ -30,8 +30,10 @@
             <td>@temp.AgreedString</td>
             <td>@temp.ApprovedString</td>
             <td>@temp.NormСontrollerString</td>
+            <td>@Html.ActionLink("Удалить", "DeleteRouteCar", new { i = @temp._rc.RouteCarId})</td>
+            <td>@Html.ActionLink("Скачать", "DownloadCard", new { i = @temp._rc.RouteCarId})</td>
         </tr>
     }
 </table>
 
-@Html.ActionLink("Скачать", "DownloadCard");
+

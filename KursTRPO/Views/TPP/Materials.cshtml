@@ -10,7 +10,7 @@
         <td>Код материала</td>
         <td>Название</td>
         <td>Сортамент</td>
-        <td>Печать</td>
+        <td>Марка</td>
         <td>Обозначение стандарта</td>
     </tr>
     @foreach (KursTRPO.Models.Material temp in Model)
@@ -21,6 +21,11 @@
             <td>@temp.Assortment</td>
             <td>@temp.Stamp</td>
             <td>@temp.DesignOfStandard</td>
+            <td>
+                @Html.ActionLink("Удалить", "DeleteMaterial", new { i = @temp.MaterialId })
+                <br />
+                @Html.ActionLink("Редактировать", "EditMaterial", new { i = @temp.MaterialId })
+            </td>
         </tr>
     }
 </table>

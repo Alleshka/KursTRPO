@@ -20,7 +20,7 @@
         <td>Номер участка</td>
         <td>Номер рабочего места</td>
     </tr>
-    @foreach (KursTRPO.Models.Operation oper in Model)
+    @foreach (KursTRPO.Models.Operation oper in Model.ToList())
     {
         <tr align="center">
             <td>@oper.OperationId</td>
@@ -30,15 +30,16 @@
             <td>@oper.TransitionName</td>
             <td>@oper.EquipmentId</td>
             <td>
-                    @foreach (var rig in oper.Riggings)
+                    @foreach (var rig in oper.Riggings.ToList())
                     {
-                        Html.DisplayFor(x => rig.RiggingId);
+                        @rig.RiggingId
                         <br />
                     }
             </td>
             <td>@oper.DepartmentNumber</td>
             <td>@oper.SiteNumber</td>
             <td>@oper.WorkplaceNumber</td>
+            <td>@Html.ActionLink("Удалить", "DeleteOperation", new { i = @oper.OperationId})</td>
         </tr>
     }
 </table>

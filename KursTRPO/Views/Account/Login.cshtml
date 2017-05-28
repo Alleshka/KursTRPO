@@ -18,6 +18,6 @@
             <label>Пароль</label><br />
             @Html.EditorFor(x => x.Password)
         </p>
-        <p><button type="submit">Войти</button></p>
+        <p><button type="submit">Войти</button> @Html.ActionLink("Регистрация", "Register")</p>
     </div>
 }

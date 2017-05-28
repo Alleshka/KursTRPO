@@ -4,7 +4,7 @@
     ViewBag.Title = "AddRoute";
 }
 
-<h2>AddRoute</h2>
+<h2>Добавить маршрут</h2>
 
 @using (Html.BeginForm())
 {
@@ -22,7 +22,7 @@
         </tr>
 
         <tr>
-            <td>Разработчик</td>
+            <td>ФИО разработчика</td>
             <td>@Html.DropDownListFor(x=>x.NameOfDeveloper, @Model.developList)</td>
         </tr>
 

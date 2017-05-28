@@ -19,7 +19,7 @@ namespace KursTRPO.Models
 
         public string TransitionType { get; set; }
 
-        public ICollection<Operation> Operations { get; set; }      
+        public virtual ICollection<Operation> Operations { get; set; }      
     }
 
     public class AddTransitionModel
