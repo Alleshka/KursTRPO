@@ -272,6 +272,8 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="App_Data\MK_-pustoy_shablon.xlsx" />
+    <Content Include="ClassDiagram1.cd" />
+    <Content Include="KP_TRPO_SAPR_TPP.doc" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -318,7 +320,6 @@
       <DependentUpon>201705250808213_usstring2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\ExcelResult.cs" />
     <Compile Include="Models\ModelToData\Equipment.cs" />
     <Compile Include="Models\ModelToData\Material.cs" />
     <Compile Include="Models\ModelToData\Operation.cs" />

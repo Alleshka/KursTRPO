@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="KursTRPO.Models.Equipment" Collapsed="true">
+    <Position X="0.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAAAAAAAAAAQAMAAAAgAAAAAAgAAAAAA=</HashCode>
+      <FileName>Models\ModelToData\Equipment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KursTRPO.Models.AddEqupmentModel" Collapsed="true">
+    <Position X="2.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAQAEAAAAgAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\ModelToData\Equipment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KursTRPO.Models.Material" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAQAAAAAABAAAAAAQAAAQAAAAAAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\ModelToData\Material.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KursTRPO.Models.AddMaterialModel" Collapsed="true">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAABAAAAAAAAAAQAAAAAAAABAAAAAAAAAAA=</HashCode>
+      <FileName>Models\ModelToData\Material.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KursTRPO.Models.Operation" Collapsed="true">
+    <Position X="0.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ADAAwAAAAAAAAAgIAEAAAAQAIABAAAAAQAAAAAAAAAI=</HashCode>
+      <FileName>Models\ModelToData\Operation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KursTRPO.Models.AddOperationModel" Collapsed="true">
+    <Position X="2.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAggAAAAAAAAAgAAEAIAAQAIAAAAAEAQAIAAAAAAAI=</HashCode>
+      <FileName>Models\ModelToData\Operation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KursTRPO.Models.Rigging" Collapsed="true">
+    <Position X="0.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAAAAAAAAAAQAAAAAAAAAAAAAgQAgAAA=</HashCode>
+      <FileName>Models\ModelToData\Rigging.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KursTRPO.Models.AddRiggingModel" Collapsed="true">
+    <Position X="2.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAQAAAAAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>Models\ModelToData\Rigging.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KursTRPO.Models.Route" Collapsed="true">
+    <Position X="0.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAABAAAgAAAAAAIAABAAEAAAAAAAAAAAAABgAA=</HashCode>
+      <FileName>Models\ModelToData\Route.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KursTRPO.Models.AddRouteModel" Collapsed="true">
+    <Position X="2.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAgAAAgAAAAAgAAABAAEAAAAAAAgAAAAABAAA=</HashCode>
+      <FileName>Models\ModelToData\Route.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KursTRPO.Models.ViewRouteModel" Collapsed="true">
+    <Position X="4" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACA=</HashCode>
+      <FileName>Models\ModelToData\Route.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KursTRPO.Models.RouteCar" Collapsed="true">
+    <Position X="0.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAACBAAAAACAAEAAAAAAAIAQAAAAAAAAAIAAAAA=</HashCode>
+      <FileName>Models\ModelToData\RouteCar.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KursTRPO.Models.AddRouteCarModel" Collapsed="true">
+    <Position X="2.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAQAAChAAAAACAAAgAAAAAAIAQAAAAAAAAAIAAAAA=</HashCode>
+      <FileName>Models\ModelToData\RouteCar.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KursTRPO.Models.ViewRouteCarModel" Collapsed="true">
+    <Position X="4" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAgAAAAEAAQACAAAAEAAAA=</HashCode>
+      <FileName>Models\ModelToData\RouteCar.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KursTRPO.Models.TechnologicalProcesses" Collapsed="true">
+    <Position X="0.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAACAAAAgEACAEQAAAQAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Models\ModelToData\TechnologicalProcesses.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KursTRPO.Models.AddTppModel" Collapsed="true">
+    <Position X="2.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAEACAAQAAAQAAAAAAAACAAAgIAAAAAA=</HashCode>
+      <FileName>Models\ModelToData\TechnologicalProcesses.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KursTRPO.Models.Transition" Collapsed="true">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAIAAAAAAAAAAgAAAAAAAAQAAAAAAAAAAAAI=</HashCode>
+      <FileName>Models\ModelToData\Transition.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KursTRPO.Models.AddTransitionModel" Collapsed="true">
+    <Position X="2.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAAAAAgAABAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\ModelToData\Transition.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KursTRPO.Models.ApplicationContext" Collapsed="true">
+    <Position X="7.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\ModelToUserData\UserContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KursTRPO.Models.ApplicationUserManager" Collapsed="true">
+    <Position X="7.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\ModelToUserData\UserManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KursTRPO.Models.TppContext" Collapsed="true">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAQAACAAAAAAAIAEAIAAAAAAAAAAAAAAAACAAAAgA=</HashCode>
+      <FileName>Models\TppContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KursTRPO.Models.ApplicationUser" Collapsed="true">
+    <Position X="7.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAAAAIAAAAAAAAAAAAAAAAAAACCAEA=</HashCode>
+      <FileName>Models\UserModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KursTRPO.Models.RegisterModel" Collapsed="true">
+    <Position X="9.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAACAAAAIAAAAAgAAAAAACAAAAAACAAEA=</HashCode>
+      <FileName>Models\UserModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KursTRPO.Models.LoginModel" Collapsed="true">
+    <Position X="9.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>Models\UserModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AspNetIdentityApp.Controllers.AccountController" Collapsed="true">
+    <Position X="6" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAAAAAAAAAAIAAAABAAIAAAAQAAAAAAA=</HashCode>
+      <FileName>Controllers\AccountController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KursTRPO.Controllers.HomeController" Collapsed="true">
+    <Position X="6" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\HomeController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KursTRPO.Controllers.TPPController" Collapsed="true">
+    <Position X="6" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAGSIoBRAAAIIEAIQgAAAAEQABIAAgABGAgBggA=</HashCode>
+      <FileName>Controllers\TPPController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
