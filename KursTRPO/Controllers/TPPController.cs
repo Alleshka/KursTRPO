@@ -474,7 +474,7 @@ namespace KursTRPO.Controllers
                 }
             }
 
-            return RedirectToAction("TechnologicalProcesseses");
+            return RedirectToAction("TechnologicalProcesses");
         }
         public ActionResult DeleteRoute(int i = -1)
         {

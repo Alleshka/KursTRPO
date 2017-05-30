@@ -30,6 +30,9 @@
         @RenderBody()
         <hr />
         <footer>
+            <div>
+                @Html.ActionLink("Вернуться на главную", "Index", "Home")
+            </div>
             <p>&copy;  «Дубль» @DateTime.Now.Year</p>
         </footer>
     </div>
